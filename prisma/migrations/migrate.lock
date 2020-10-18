@@ -1,0 +1,11 @@
+# Prisma Migrate lockfile v1
+
+20201014180107-create-user
+20201014193748-start
+20201018120933-add-store
+20201018140548-remode-email
+20201018142957-add-uniq
+20201018170553-add-product
+20201018173254-remove-uniq-on-product
+20201018174714-add-sale-model
+20201018175005-require-summary
