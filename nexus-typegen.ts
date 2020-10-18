@@ -40,6 +40,13 @@ export interface NexusGenRootTypes {
     price?: number | null; // Int
   }
   Query: {};
+  Sale: { // root type
+    count?: number | null; // Int
+    discount?: number | null; // Int
+    id?: number | null; // Int
+    note?: number | null; // Int
+    summary?: number | null; // Int
+  }
   Store: { // root type
     id?: number | null; // Int
     name?: string | null; // String
@@ -80,6 +87,14 @@ export interface NexusGenFieldTypes {
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
     users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
+  Sale: { // field return type
+    count: number | null; // Int
+    discount: number | null; // Int
+    id: number | null; // Int
+    note: number | null; // Int
+    summary: number | null; // Int
+    users: NexusGenRootTypes['User'] | null; // User
+  }
   Store: { // field return type
     id: number | null; // Int
     name: string | null; // String
@@ -118,7 +133,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Product" | "Query" | "Store" | "User";
+export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Product" | "Query" | "Sale" | "Store" | "User";
 
 export type NexusGenInputNames = never;
 

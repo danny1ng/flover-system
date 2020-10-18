@@ -27,6 +27,15 @@ type Query {
   users: [User]
 }
 
+type Sale {
+  count: Int
+  discount: Int
+  id: Int
+  note: Int
+  summary: Int
+  users: User
+}
+
 type Store {
   id: Int
   name: String
