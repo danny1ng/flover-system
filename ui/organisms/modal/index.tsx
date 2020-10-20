@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useRef } from 'react';
 import FocusLock from 'react-focus-lock';
 import useKey from 'react-use/lib/useKey';
-import { useDisableWindowScroll } from 'lib';
+import { useDisableWindowScroll } from 'libs';
 
 import { Content, ContentContainer } from './content';
 import { Underlay } from './underlay';

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import styled from 'astroturf/react';
+import styled from 'astroturf';
 
-import icons from './sprite.svg?original';
+import icons from './sprite.svg';
 import { IconsType } from './types';
 
 export type IconProps = {

@@ -1,4 +1,4 @@
-import styled from 'astroturf/react';
+import styled from 'astroturf';
 
 export const Underlay = styled.div`
   @apply bg-primary bg-opacity-50;

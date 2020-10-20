@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styled from 'astroturf/react';
+import styled from 'astroturf';
 
 import { Portal } from '../../atoms';
 

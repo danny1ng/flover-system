@@ -8,7 +8,7 @@ export const Sale = objectType({
     t.int('discount');
     t.int('summary');
     t.int('note');
-    t.date('createdAt');
+    t.string('createdAt');
     t.field('product', {
       type: 'Product',
       resolve: (parent, arg, ctx) =>

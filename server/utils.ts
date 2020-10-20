@@ -15,11 +15,11 @@ export function getUserId(context: any) {
   }
 }
 
-function getUser(ctx: any) {
-  const auth = ctx.request.get('Authorization');
-  if (users[auth]) {
-    return users[auth];
-  } else {
-    return null;
-  }
-}
+// function getUser(ctx: any) {
+//   const auth = ctx.request.get('Authorization');
+//   if (users[auth]) {
+//     return users[auth];
+//   } else {
+//     return null;
+//   }
+// }

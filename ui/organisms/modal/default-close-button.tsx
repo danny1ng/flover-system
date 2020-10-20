@@ -1,4 +1,4 @@
-import styled from 'astroturf/react';
+import styled from 'astroturf';
 
 export const DefaultModalCloseButton = styled('button')`
   position: fixed;
