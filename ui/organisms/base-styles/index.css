@@ -1,0 +1,28 @@
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+
+@font-face {
+  font-family: 'Avenir Next Cyr';
+  font-weight: bold;
+  font-style: normal;
+  src: url(./fonts/AvenirNextCyr-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Avenir Next Cyr';
+  src: url(./fonts/AvenirNextCyr-Regular.woff) format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-200;
+}
+
+svg {
+  fill: currentColor;
+}
