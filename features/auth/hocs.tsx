@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { NextPage, NextPageContext } from 'next';
 
+import { getCurrentUserQuery, useCurrentUser } from 'features/user';
+
 import { merge } from 'libs/merge';
 import { createQueryPrefetcher } from 'libs/react-query';
 import { redirect } from 'libs/redirect';
-import { getCurrentUserQueryKey, useCurrentUser } from 'features/user';
 
 import { checkAuth } from './helpers';
 import { useCheckAuth } from './hooks';
@@ -45,7 +46,7 @@ export const withPageAuth = (
     if (ctx.res) {
       const { queryCache, fetcher, getDehydratedProps } = createQueryPrefetcher(ctx);
       const data = await queryCache.prefetchQuery<APIResponse<CurrentUser>>(
-        getCurrentUserQueryKey(),
+        getCurrentUserQuery,
         fetcher,
       );
 

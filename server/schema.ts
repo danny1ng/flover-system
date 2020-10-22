@@ -1,13 +1,14 @@
 import { makeSchema } from '@nexus/schema';
-import * as types from './types';
 import { applyMiddleware } from 'graphql-middleware';
 import path from 'path';
+
 import { permissions } from './permissions';
+import * as types from './types';
 
 const baseSchema = makeSchema({
   types,
   outputs: {
-    typegen: path.join(process.cwd(), 'nexus-typegen.ts'),
+    typegen: path.join(process.cwd(), 'nexus-typegen.d.ts'),
     schema: path.join(process.cwd(), 'server', 'schema.graphql'),
   },
   typegenAutoConfig: {

@@ -42,6 +42,7 @@ export interface NexusGenRootTypes {
   Query: {};
   Sale: { // root type
     count?: number | null; // Int
+    createdAt?: string | null; // String
     discount?: number | null; // Int
     id?: number | null; // Int
     note?: number | null; // Int
@@ -89,11 +90,12 @@ export interface NexusGenFieldTypes {
   }
   Sale: { // field return type
     count: number | null; // Int
+    createdAt: string | null; // String
     discount: number | null; // Int
     id: number | null; // Int
     note: number | null; // Int
+    product: NexusGenRootTypes['Product'] | null; // Product
     summary: number | null; // Int
-    users: NexusGenRootTypes['User'] | null; // User
   }
   Store: { // field return type
     id: number | null; // Int

@@ -1,6 +1,8 @@
 import { intArg, mutationType, stringArg } from '@nexus/schema';
 import { compare, hash } from 'bcryptjs';
+import cookie from 'cookie';
 import { sign } from 'jsonwebtoken';
+
 import { APP_SECRET, getUserId } from '../../utils';
 
 export const Mutation = mutationType({
@@ -24,6 +26,12 @@ export const Mutation = mutationType({
         if (!passwordValid) {
           throw new Error('Invalid password');
         }
+        ctx.res.setHeader('set-cookie', [
+          cookie.serialize('authorization', 'Bearer ', {
+            path: '/',
+            httpOnly: true,
+          }),
+        ]);
         return {
           token: sign({ userId: user.id }, APP_SECRET),
           user,

@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import constate from 'constate';
 
-import { getCurrentUserQueryKey } from './api';
+import { getCurrentUserQuery } from './api';
 
 const useCurrentUserImpl = () => {
   const { data, isSuccess, isError, isFetched } = useQuery<APIResponse<CurrentUser>>(
-    getCurrentUserQueryKey(),
+    getCurrentUserQuery,
     {
       cacheTime: Infinity,
       // disable default redirect
@@ -14,7 +14,7 @@ const useCurrentUserImpl = () => {
       retry: 1,
     },
   );
-
+  console.log('data', data);
   const isLoaded = isFetched || isSuccess || isError;
 
   return useMemo(() => ({ currentUser: data?.payload, isLoaded }), [data?.payload, isLoaded]);

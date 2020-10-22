@@ -29,11 +29,12 @@ type Query {
 
 type Sale {
   count: Int
+  createdAt: String
   discount: Int
   id: Int
   note: Int
+  product: Product
   summary: Int
-  users: User
 }
 
 type Store {

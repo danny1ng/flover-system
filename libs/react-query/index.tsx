@@ -4,7 +4,7 @@ import { Hydrate } from 'react-query/hydration';
 
 import { redirect } from 'libs/redirect';
 
-import { createQueryFetcher } from './fetcher';
+import { fetcher } from './fetcher';
 
 interface ReactQueryProviderProps {
   config?: ReactQueryConfig<unknown, APIError>;
@@ -15,7 +15,7 @@ let isRedirecting = false;
 
 const defaultConfig: ReactQueryConfig<unknown, APIError> = {
   queries: {
-    queryFn: createQueryFetcher(),
+    queryFn: fetcher,
     onError: err => {
       if (err && err.statusCode === 401 && !isRedirecting) {
         isRedirecting = true;

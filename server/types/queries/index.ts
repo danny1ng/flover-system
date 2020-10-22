@@ -1,4 +1,5 @@
 import { intArg, queryType, stringArg } from '@nexus/schema';
+
 import { getUserId } from '../../utils';
 
 export const Query = queryType({
@@ -8,6 +9,7 @@ export const Query = queryType({
       nullable: true,
       resolve: (parent, args, ctx) => {
         const userId = getUserId(ctx);
+
         return ctx.prisma.user.findOne({
           where: {
             id: Number(userId),
