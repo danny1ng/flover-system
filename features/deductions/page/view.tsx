@@ -6,7 +6,7 @@ import { Head, Layout } from 'features/layout';
 import { getProductsQuery } from '../api';
 import { Table } from '../orgranisms/table';
 
-export const SaleViewPage = () => {
+export const DeductionsPage = () => {
   const { data } = useQuery<{
     products: NexusGenFieldTypes['Query']['products'];
   }>([getProductsQuery, { storeId: 1 }]);

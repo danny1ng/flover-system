@@ -14,7 +14,6 @@ const useCurrentUserImpl = () => {
       retry: 1,
     },
   );
-  console.log('data', data);
   const isLoaded = isFetched || isSuccess || isError;
 
   return useMemo(() => ({ currentUser: data?.payload, isLoaded }), [data?.payload, isLoaded]);

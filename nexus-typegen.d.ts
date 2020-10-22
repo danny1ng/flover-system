@@ -3,11 +3,16 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "./server/context"
 
 
 
 
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    model: NexusPrisma<TypeName, 'model'>
+    crud: any
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
