@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef } from 'react';
+import { FC, useCallback, useRef } from 'react';
 import FocusLock from 'react-focus-lock';
 import useKey from 'react-use/lib/useKey';
 import { useDisableWindowScroll } from 'libs';
