@@ -32,6 +32,18 @@ export const Query = queryType({
       },
     });
 
+    t.list.field('deductions', {
+      type: 'Deduction',
+      args: {
+        storeId: intArg({ nullable: false }),
+      },
+      resolve: (parent, args, ctx) => {
+        return ctx.prisma.deduction.findMany({
+          where: { storeId: Number(args.storeId) },
+        });
+      },
+    });
+
     t.list.field('products', {
       type: 'Product',
       args: {

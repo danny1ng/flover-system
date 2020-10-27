@@ -4,11 +4,11 @@ import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Head, Layout } from 'features/layout';
 
 import { getProductsQuery } from '../api';
-import { Table } from '../orgranisms/table';
+import { Table } from '../organisms/table';
 
 export const DeductionsPage = () => {
   const { data } = useQuery<{
-    products: NexusGenFieldTypes['Query']['products'];
+    deductions: NexusGenFieldTypes['Query']['deductions'];
   }>([getProductsQuery, { storeId: 1 }]);
   return (
     <>
@@ -19,7 +19,7 @@ export const DeductionsPage = () => {
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                  {data?.products && <Table data={data.products} />}
+                  {data?.deductions && <Table data={data.deductions} />}
                 </div>
               </div>
             </div>

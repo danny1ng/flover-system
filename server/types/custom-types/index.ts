@@ -3,3 +3,4 @@ export * from './auth-payload';
 export * from './store';
 export * from './product';
 export * from './sale';
+export * from './deduction';

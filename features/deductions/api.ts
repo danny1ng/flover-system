@@ -1,12 +1,11 @@
 import { gql } from 'graphql-request';
 
 export const getProductsQuery = gql`
-  {
-    products(storeId: 1) {
+  query Deductions($storeId: Int!) {
+    deductions(storeId: $storeId) {
       id
-      name
-      price
-      count
+      message
+      summary
     }
   }
 `;

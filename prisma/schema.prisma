@@ -8,11 +8,12 @@ datasource db {
 }
 
 model Store {
-  id       Int       @id @default(autoincrement())
-  name     String
-  products Product[]
-  balance  Int       @default(0)
-  users    User[]    @relation(references: [id])
+  id        Int         @id @default(autoincrement())
+  name      String
+  products  Product[]
+  balance   Int         @default(0)
+  users     User[]      @relation(references: [id])
+  deduction Deduction[]
 }
 
 model User {
@@ -30,7 +31,7 @@ model Product {
   store   Store  @relation(fields: [storeId], references: [id])
   storeId Int
   price   Int
-  Sale    Sale[]
+  sale    Sale[]
 }
 
 model Sale {
@@ -39,16 +40,17 @@ model Sale {
   productId Int
   count     Int
   discount  Int?
-  summary   Int
   note      String?
   createdAt DateTime @default(now())
 }
 
 model Deduction {
-  id      Int    @id @default(autoincrement())
-  message String
-  summary Int
-
+  id        Int      @id @default(autoincrement())
+  message   String
+  summary   Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
+  createdAt DateTime @default(now())
 }
 
 enum Role {

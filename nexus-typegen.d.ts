@@ -3,16 +3,11 @@
  * Do not make changes to this file directly
  */
 
+import * as Context from "./server/context"
 
 
 
 
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    model: NexusPrisma<TypeName, 'model'>
-    crud: any
-  }
-}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -36,6 +31,11 @@ export interface NexusGenRootTypes {
   AuthPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
+  }
+  Deduction: { // root type
+    id?: number | null; // Int
+    message?: string | null; // String
+    summary?: number | null; // Int
   }
   Mutation: {};
   Product: { // root type
@@ -76,6 +76,12 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Deduction: { // field return type
+    id: number | null; // Int
+    message: string | null; // String
+    store: NexusGenRootTypes['Store'] | null; // Store
+    summary: number | null; // Int
+  }
   Mutation: { // field return type
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
@@ -88,6 +94,7 @@ export interface NexusGenFieldTypes {
     store: NexusGenRootTypes['Store'] | null; // Store
   }
   Query: { // field return type
+    deductions: Array<NexusGenRootTypes['Deduction'] | null> | null; // [Deduction]
     me: NexusGenRootTypes['User'] | null; // User
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
@@ -129,6 +136,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    deductions: { // args
+      storeId: number; // Int!
+    }
     products: { // args
       storeId: number; // Int!
     }
@@ -140,7 +150,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Product" | "Query" | "Sale" | "Store" | "User";
+export type NexusGenObjectNames = "AuthPayload" | "Deduction" | "Mutation" | "Product" | "Query" | "Sale" | "Store" | "User";
 
 export type NexusGenInputNames = never;
 

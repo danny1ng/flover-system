@@ -3,20 +3,16 @@ import { NexusGenFieldTypes } from 'nexus-typegen';
 
 const columns: Column[] = [
   {
-    Header: 'Товар',
-    accessor: 'name', // accessor is the "key" in the data
+    Header: 'Название',
+    accessor: 'message', // accessor is the "key" in the data
   },
   {
-    Header: 'Цена',
-    accessor: 'price',
-  },
-  {
-    Header: 'Кол-во',
-    accessor: 'count',
+    Header: 'Сумма',
+    accessor: 'summary',
   },
 ];
 
-export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] }) => {
+export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['deductions'] }) => {
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 

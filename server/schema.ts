@@ -8,7 +8,7 @@ import * as types from './types';
 
 const baseSchema = makeSchema({
   types,
-  plugins: [nexusPrisma()],
+  // plugins: [nexusPrisma()],
   outputs: {
     typegen: path.join(process.cwd(), 'nexus-typegen.d.ts'),
     schema: path.join(process.cwd(), 'server', 'schema.graphql'),

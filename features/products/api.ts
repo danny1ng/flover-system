@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request';
 
 export const getProductsQuery = gql`
-  {
-    products(storeId: 1) {
+  query Products($storeId: Int!) {
+    products(storeId: $storeId) {
       id
       name
       price
