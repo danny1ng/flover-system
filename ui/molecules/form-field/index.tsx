@@ -1,4 +1,3 @@
-import React from 'react';
 import { Controller, get, useFormContext, ValidationRules } from 'react-hook-form';
 import cl from 'clsx';
 
