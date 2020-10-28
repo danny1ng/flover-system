@@ -60,6 +60,7 @@ export interface NexusGenRootTypes {
   User: { // root type
     id?: number | null; // Float
     name?: string | null; // String
+    role?: string | null; // String
   }
 }
 
@@ -118,6 +119,7 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     id: number | null; // Float
     name: string | null; // String
+    role: string | null; // String
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
   }
 }

@@ -4,7 +4,7 @@ import { Hydrate } from 'react-query/hydration';
 
 import { redirect } from 'libs/redirect';
 
-import { fetcher } from './fetcher';
+import { graphQLClientClient } from '../client';
 
 interface ReactQueryProviderProps {
   config?: ReactQueryConfig<unknown, APIError>;
@@ -15,7 +15,7 @@ let isRedirecting = false;
 
 const defaultConfig: ReactQueryConfig<unknown, APIError> = {
   queries: {
-    queryFn: fetcher,
+    queryFn: graphQLClientClient.request,
     onError: err => {
       if (err && err.statusCode === 401 && !isRedirecting) {
         isRedirecting = true;

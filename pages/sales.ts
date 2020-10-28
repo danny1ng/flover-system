@@ -1,1 +1,1 @@
-export { SaleViewPage as default } from 'features/sales';
+export { SaleListPage as default } from 'features/sales';

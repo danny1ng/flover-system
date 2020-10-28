@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: postgres:11-alpine
+    container_name: ${PROJECT_NAME}_db
+    restart: on-failure
+    env_file:
+      - ./.env
+    volumes:
+      - ${DB_LOCAL_PATH}:/var/lib/postgresql/data
+    ports:
+      - 5433:5432

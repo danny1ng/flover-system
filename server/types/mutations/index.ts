@@ -7,6 +7,26 @@ import { APP_SECRET, getUserId } from '../../utils';
 
 export const Mutation = mutationType({
   definition(t) {
+    // t.field('signup', {
+    //   type: 'AuthPayload',
+    //   args: {
+    //     name: stringArg(),
+    //     password: stringArg({ nullable: false }),
+    //   },
+    //   resolve: async (_parent, { name, password }, ctx) => {
+    //     const hashedPassword = await hash(password, 10);
+    //     const user = await ctx.prisma.user.create({
+    //       data: {
+    //         name,
+    //         password: hashedPassword,
+    //       },
+    //     });
+    //     return {
+    //       token: sign({ userId: user.id }, APP_SECRET),
+    //       user,
+    //     };
+    //   },
+    // });
     t.field('login', {
       type: 'AuthPayload',
       args: {
@@ -26,10 +46,10 @@ export const Mutation = mutationType({
         if (!passwordValid) {
           throw new Error('Invalid password');
         }
-        ctx.res.setHeader('set-cookie', [
-          cookie.serialize('authorization', 'Bearer ', {
+
+        ctx.res.setHeader('Set-Cookie', [
+          cookie.serialize('authorization', `Bearer ${sign({ userId: user.id }, APP_SECRET)}`, {
             path: '/',
-            httpOnly: true,
           }),
         ]);
         return {

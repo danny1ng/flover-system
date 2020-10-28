@@ -1,4 +1,3 @@
-import request from 'graphql-request';
-import { RequestDocument } from 'graphql-request/dist/types';
+import { GraphQLClient } from 'graphql-request';
 
-export const client = (gql: RequestDocument, vars: any) => request('/api', gql, vars);
+export const graphQLClientClient = new GraphQLClient('/api');

@@ -21,7 +21,6 @@ model User {
   password String  @default("")
   name     String  @unique
   stores   Store[]
-  role     Role    @default(SALLER)
 }
 
 model Product {
@@ -55,5 +54,5 @@ model Deduction {
 
 enum Role {
   ADMIN
-  SALLER
+  SELLER
 }

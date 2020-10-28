@@ -1,13 +1,12 @@
 import { QueryCache } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { NextPageContext } from 'next';
 
-import { fetcher } from './fetcher';
+import { graphQLClientClient } from '../client';
 
-export const createQueryPrefetcher = (ctx: NextPageContext) => {
+export const createQueryPrefetcher = () => {
   const queryCache = new QueryCache();
 
   const getDehydratedProps = () => ({ dehydratedState: dehydrate(queryCache) });
 
-  return { queryCache, getDehydratedProps, fetcher };
+  return { queryCache, getDehydratedProps, fetcher: graphQLClientClient.request };
 };

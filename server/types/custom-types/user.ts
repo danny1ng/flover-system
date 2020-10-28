@@ -5,6 +5,7 @@ export const User = objectType({
   definition(t) {
     t.float('id');
     t.string('name');
+    t.string('role');
     t.list.field('stores', {
       type: 'Store',
       resolve: (parent, arg, ctx) =>

@@ -55,5 +55,6 @@ type Store {
 type User {
   id: Float
   name: String
+  role: String
   stores: [Store]
 }
