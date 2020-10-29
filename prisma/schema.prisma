@@ -21,6 +21,7 @@ model User {
   password String  @default("")
   name     String  @unique
   stores   Store[]
+  role     Role    @default(SELLER)
 }
 
 model Product {

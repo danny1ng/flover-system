@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import cookie from 'cookie';
 import { NexusGenFieldTypes, NexusGenTypes } from 'nexus-typegen';
 
 import { loginReq } from 'features/auth/api';
 import { Head } from 'features/layout';
+
+import { redirect } from 'libs/redirect';
 
 import { withPageAuth } from '../../hocs';
 import { AuthWrapper } from '../../templates/auth-wrapper';
@@ -16,9 +17,8 @@ const SignIn = () => {
     formState: { isSubmitting },
   } = useForm();
   const [login] = useMutation<{ login: NexusGenFieldTypes['Mutation']['login'] }>(loginReq, {
-    onSuccess: data => {
-      (document.cookie = cookie.serialize('authorization', `Bearer ${data.login.token}`)),
-        console.log('d', data);
+    onSuccess: () => {
+      location.href = '/';
     },
   });
 

@@ -34,6 +34,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-object-literal-type-assertion': 0,
     '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/ban-types': 0,
     'no-duplicate-imports': 2,
     'react-hooks/exhaustive-deps': 2,
     'react-hooks/rules-of-hooks': 2,

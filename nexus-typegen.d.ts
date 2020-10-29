@@ -86,6 +86,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Product: { // field return type
     count: number | null; // Int
@@ -134,6 +135,10 @@ export interface NexusGenArgTypes {
     }
     login: { // args
       name: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      name?: string | null; // String
       password: string; // String!
     }
   }

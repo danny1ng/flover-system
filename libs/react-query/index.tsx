@@ -15,7 +15,8 @@ let isRedirecting = false;
 
 const defaultConfig: ReactQueryConfig<unknown, APIError> = {
   queries: {
-    queryFn: graphQLClientClient.request,
+    queryFn: (gql, we) => graphQLClientClient.request(gql, we),
+    // queryFn: (a, b) => request('/api', a, b),
     onError: err => {
       if (err && err.statusCode === 401 && !isRedirecting) {
         isRedirecting = true;

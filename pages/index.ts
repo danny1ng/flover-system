@@ -4,8 +4,6 @@ import { redirect } from 'libs/redirect';
 
 const HomePage: NextPage = () => null;
 
-HomePage.getInitialProps = async ctx => {
-  redirect(ctx, '/sales');
-};
+HomePage.getInitialProps = async ctx => redirect(ctx, '/sales');
 
 export default HomePage;

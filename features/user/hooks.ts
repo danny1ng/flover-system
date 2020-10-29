@@ -5,7 +5,7 @@ import constate from 'constate';
 import { getCurrentUserQuery } from './api';
 
 const useCurrentUserImpl = () => {
-  const { data, isSuccess, isError, isFetched } = useQuery<APIResponse<CurrentUser>>(
+  const { data, isSuccess, isError, isFetched } = useQuery<{ me: CurrentUser }>(
     getCurrentUserQuery,
     {
       cacheTime: Infinity,
@@ -15,8 +15,7 @@ const useCurrentUserImpl = () => {
     },
   );
   const isLoaded = isFetched || isSuccess || isError;
-
-  return useMemo(() => ({ currentUser: data?.payload, isLoaded }), [data?.payload, isLoaded]);
+  return useMemo(() => ({ currentUser: data?.me, isLoaded }), [data?.me, isLoaded]);
 };
 
 export const [CurrentUserProvider, useCurrentUser] = constate(useCurrentUserImpl);

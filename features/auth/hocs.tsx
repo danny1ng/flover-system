@@ -41,18 +41,15 @@ export const withPageAuth = (
 
   WithPageAuth.getInitialProps = async (ctx: NextPageContext) => {
     let extraDehydratedState = {};
-
     // server side auth check
     if (ctx.res) {
       const { queryCache, fetcher, getDehydratedProps } = createQueryPrefetcher(ctx);
-      const data = await queryCache.prefetchQuery<APIResponse<CurrentUser>>(
-        getCurrentUserQuery,
-        fetcher,
+      const data = await queryCache.prefetchQuery<{ me: CurrentUser }>(getCurrentUserQuery, () =>
+        fetcher.request(getCurrentUserQuery),
       );
 
       extraDehydratedState = getDehydratedProps().dehydratedState;
-
-      const currentUser = data?.payload;
+      const currentUser = data?.me;
 
       if (!checkAuth(authParams, currentUser)) {
         const url = getRedirectUrl(currentUser, ctx);

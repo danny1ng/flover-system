@@ -10,7 +10,8 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json server/schema",
     "migrate:save": "npx prisma migrate save --experimental",
-    "migrate:up": "npx prisma migrate up --experimental"
+    "migrate:up": "npx prisma migrate up --experimental",
+    "studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
