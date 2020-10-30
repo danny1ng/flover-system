@@ -1,26 +1,17 @@
 import { FC } from 'react';
-import cn from 'clsx';
+import styled from 'astroturf';
 
-import styles from './styles.module.scss';
+export const Button = styled.button`
+  @apply group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 transition duration-150 ease-in-out;
 
-type ButtonProps = {
-  as?: string;
-  type?: 'submit' | 'button' | any;
-  className?: string;
-  variant?: 'solid' | 'outlined' | 'underlined' | 'link' | 'icon';
-  size?: 'sm' | 'md';
-  disabled?: boolean;
-} & Record<string, any>;
+  &:hover {
+    @apply bg-indigo-500;
+  }
+  &:focus {
+    @apply outline-none border-indigo-700 shadow-outline-indigo;
+  }
 
-export const Button: FC<ButtonProps> = ({
-  as = 'button',
-  variant = 'solid',
-  size = 'sm',
-  className,
-  type = 'button',
-  ...props
-}) => {
-  const Comp = as as any;
-
-  return <Comp className={cn(styles[variant], styles[size], className)} type={type} {...props} />;
-};
+  &:active {
+    @apply bg-indigo-700;
+  }
+`;
