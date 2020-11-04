@@ -3,3 +3,5 @@ src/generated/
 .next/
 .prisma-examples/
 db-data
+
+.env
