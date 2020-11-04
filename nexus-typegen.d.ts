@@ -125,6 +125,59 @@ export interface NexusGenFieldTypes {
   }
 }
 
+export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
+  Deduction: { // field return type name
+    id: 'Int'
+    message: 'String'
+    store: 'Store'
+    summary: 'Int'
+  }
+  Mutation: { // field return type name
+    createProduct: 'Product'
+    login: 'AuthPayload'
+    signup: 'AuthPayload'
+  }
+  Product: { // field return type name
+    count: 'Int'
+    id: 'Int'
+    name: 'String'
+    price: 'Int'
+    store: 'Store'
+  }
+  Query: { // field return type name
+    deductions: 'Deduction'
+    me: 'User'
+    products: 'Product'
+    stores: 'Store'
+    users: 'User'
+  }
+  Sale: { // field return type name
+    count: 'Int'
+    createdAt: 'String'
+    discount: 'Int'
+    id: 'Int'
+    note: 'Int'
+    product: 'Product'
+    summary: 'Int'
+  }
+  Store: { // field return type name
+    id: 'Int'
+    name: 'String'
+    products: 'Product'
+    users: 'User'
+  }
+  User: { // field return type name
+    id: 'Float'
+    name: 'String'
+    role: 'String'
+    stores: 'Store'
+  }
+}
+
 export interface NexusGenArgTypes {
   Mutation: {
     createProduct: { // args
@@ -175,6 +228,7 @@ export interface NexusGenTypes {
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;
   fieldTypes: NexusGenFieldTypes;
+  fieldTypeNames: NexusGenFieldTypeNames;
   allTypes: NexusGenAllTypes;
   inheritedFields: NexusGenInheritedFields;
   objectNames: NexusGenObjectNames;
