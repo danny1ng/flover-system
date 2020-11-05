@@ -1,11 +1,18 @@
 import { useQuery } from 'react-query';
+import { styled } from 'linaria/react';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 
+// import { Button } from 'ui';
 import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
 
 import { getProductsQuery } from '../api';
 import { Table } from '../organisms/table';
+
+const Button = styled.button`
+  @apply mb-4;
+  margin-top: 50px;
+`;
 
 const SaleList = () => {
   const { data } = useQuery<{
@@ -19,6 +26,7 @@ const SaleList = () => {
           <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <Button>rerer</Button>
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   {data?.products && <Table data={data.products} />}
                 </div>
@@ -31,7 +39,4 @@ const SaleList = () => {
   );
 };
 
-export const SaleListPage = withPageAuth(
-  { pageType: 'privateOnly', roles: ['SELLER'] },
-  () => '/sign-in',
-)(SaleList);
+export const SaleListPage = withPageAuth({ roles: ['SELLER'] }, () => '/sign-in')(SaleList);
