@@ -39,7 +39,7 @@ export const Select = () => {
       </div>
       <div
         {...getMenuProps()}
-        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg outline-none"
       >
         {isOpen && (
           <div

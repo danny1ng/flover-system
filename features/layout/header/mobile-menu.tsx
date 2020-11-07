@@ -33,9 +33,6 @@ export const MobileMenu = ({ isOpenMenu }: { isOpenMenu: boolean }) => {
           <div className="space-y-1">
             <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
           </div>
-          <div className="space-y-1">
-            <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
-          </div>
         </div>
         <div className="mt-3 px-2 space-y-1">
           <a
