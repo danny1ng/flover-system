@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useLogout } from 'features/auth';
+import { useCurrentUser } from 'features/user';
 
 import { links } from './nav-links';
 
 export const MobileMenu = ({ isOpenMenu }: { isOpenMenu: boolean }) => {
+  const { currentUser } = useCurrentUser();
   const { asPath } = useRouter();
   const logout = useLogout();
 
@@ -29,7 +31,10 @@ export const MobileMenu = ({ isOpenMenu }: { isOpenMenu: boolean }) => {
       <div className="pt-4 pb-3 border-t border-gray-700">
         <div className="flex items-center px-5 space-x-3">
           <div className="space-y-1">
-            <div className="text-base font-medium leading-none text-white">Имя</div>
+            <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
+          </div>
+          <div className="space-y-1">
+            <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
           </div>
         </div>
         <div className="mt-3 px-2 space-y-1">

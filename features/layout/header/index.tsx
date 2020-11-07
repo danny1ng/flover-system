@@ -62,7 +62,13 @@ export const Header = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
-                <Select />
+                {currentUser.role === 'ADMIN' ? (
+                  <Select />
+                ) : (
+                  <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">
+                    Точка: {currentUser.stores[0].name}
+                  </p>
+                )}
 
                 <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">
                   {currentUser.name}
