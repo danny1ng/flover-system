@@ -1,4 +1,5 @@
 import { gql } from 'graphql-request';
+import { graphQLClientClient } from 'libs';
 
 export const getProductsQuery = gql`
   query Products($storeId: Int!) {
@@ -10,3 +11,16 @@ export const getProductsQuery = gql`
     }
   }
 `;
+
+export const addProductReq = values =>
+  graphQLClientClient.request(
+    gql`
+      mutation addProduct($name: String!, $storeId: Int!, $price: Int!, $count: Int) {
+        addProduct(name: $name, storeId: $storeId, price: $price, count: $count) {
+          id
+          name
+        }
+      }
+    `,
+    values,
+  );

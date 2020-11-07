@@ -41,11 +41,11 @@ export const Mutation = mutationType({
           },
         });
         if (!user) {
-          throw new Error(`No user found for email: ${name}`);
+          throw new Error('Не правильные данные');
         }
         const passwordValid = await compare(password, user.password);
-        if (!passwordValid) {
-          throw new Error('Invalid password');
+        if (!passwordValid || !user) {
+          throw new Error('Не правильные данные');
         }
 
         ctx.res.setHeader('Set-Cookie', [
@@ -59,7 +59,7 @@ export const Mutation = mutationType({
         };
       },
     });
-    t.field('createProduct', {
+    t.field('addProduct', {
       type: 'Product',
       args: {
         storeId: intArg({ nullable: false }),

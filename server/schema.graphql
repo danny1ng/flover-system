@@ -15,7 +15,7 @@ type Deduction {
 }
 
 type Mutation {
-  createProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
+  addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
   login(name: String!, password: String!): AuthPayload
   signup(name: String, password: String!): AuthPayload
 }

@@ -7,6 +7,7 @@ type GetComponentProps<T> = T extends React.ComponentType<infer P> | React.Compo
 
 export type FieldsetProps<T = React.FunctionComponent> = {
   name: string;
+  label: string;
   className?: string;
   component: T;
   rules?: ValidationRules;
@@ -27,24 +28,23 @@ export function FormField<T = React.FunctionComponent>(props: FieldsetProps<T>) 
 
   return (
     <div className={cl('relative pb-2', className)}>
-      {controlled ? (
-        <Controller
-          control={control}
-          name={name}
-          rules={rules}
-          render={renderProps => (
-            <Component className="w-full" label={label} {...defaultProps} {...renderProps} />
+      <label className="block text-sm font-medium leading-5 text-gray-700">
+        <span className="mb-2 block">{label}</span>
+        <div>
+          {controlled ? (
+            <Controller
+              control={control}
+              name={name}
+              rules={rules}
+              render={renderProps => (
+                <Component className="w-full" label={label} {...defaultProps} {...renderProps} />
+              )}
+            />
+          ) : (
+            <Component className="w-full" name={name} ref={register} {...defaultProps} />
           )}
-        />
-      ) : (
-        <Component
-          className="w-full"
-          placeholder={label}
-          name={name}
-          ref={register}
-          {...defaultProps}
-        />
-      )}
+        </div>
+      </label>
 
       {errors && (
         <p className="text-auxiliaryRed900 text-xs absolute pl-2">{get(errors, name)?.message}</p>

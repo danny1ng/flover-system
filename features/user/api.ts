@@ -7,6 +7,11 @@ export const getCurrentUserQuery = gql`
     me {
       id
       role
+      name
+      stores {
+        id
+        name
+      }
     }
   }
 `;

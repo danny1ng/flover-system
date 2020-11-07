@@ -26,3 +26,8 @@ body {
 svg {
   fill: currentColor;
 }
+input:-webkit-autofill {
+  background-color: white !important;
+  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-text-fill-color: #333;
+}

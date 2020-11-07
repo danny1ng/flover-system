@@ -1,7 +1,6 @@
-import styled from 'astroturf';
+import styled from 'astroturf/react';
 
 export const Underlay = styled.div`
-  @apply bg-primary bg-opacity-50;
   position: fixed;
   z-index: -1;
   top: 0;

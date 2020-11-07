@@ -1,18 +1,12 @@
 import { useQuery } from 'react-query';
-import { styled } from 'linaria/react';
 import { NexusGenFieldTypes } from 'nexus-typegen';
+import { Button } from 'ui';
 
-// import { Button } from 'ui';
 import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
 
 import { getProductsQuery } from '../api';
 import { Table } from '../organisms/table';
-
-const Button = styled.button`
-  @apply mb-4;
-  margin-top: 50px;
-`;
 
 const SaleList = () => {
   const { data } = useQuery<{
@@ -39,4 +33,4 @@ const SaleList = () => {
   );
 };
 
-export const SaleListPage = withPageAuth({ roles: ['SELLER'] }, () => '/sign-in')(SaleList);
+export const SaleListPage = withPageAuth({ roles: ['SELLER', 'ADMIN'] })(SaleList);

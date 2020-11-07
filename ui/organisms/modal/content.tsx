@@ -1,4 +1,4 @@
-import styled from 'astroturf';
+import styled from 'astroturf/react';
 
 export const ContentContainer = styled.div`
   height: 100%;

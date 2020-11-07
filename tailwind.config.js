@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-// const theme = require('./ui/theme/index');
-
 module.exports = {
+  important: true,
   purge: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './features/**/*.{js,ts,jsx,tsx}',
@@ -12,5 +9,4 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  // theme,
 };

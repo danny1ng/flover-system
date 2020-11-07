@@ -1,2 +1,2 @@
 export * from './page/view';
-export * from './page/create';
+export * from './page/add';

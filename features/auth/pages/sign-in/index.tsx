@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { NexusGenFieldTypes, NexusGenTypes } from 'nexus-typegen';
+import { getGlobalError } from 'libs';
+import { NexusGenFieldTypes } from 'nexus-typegen';
+import { Button, TextInput } from 'ui';
 
 import { loginReq } from 'features/auth/api';
 import { Head } from 'features/layout';
-
-import { redirect } from 'libs/redirect';
 
 import { withPageAuth } from '../../hocs';
 import { AuthWrapper } from '../../templates/auth-wrapper';
@@ -16,52 +16,51 @@ const SignIn = () => {
     register,
     formState: { isSubmitting },
   } = useForm();
-  const [login] = useMutation<{ login: NexusGenFieldTypes['Mutation']['login'] }>(loginReq, {
-    onSuccess: () => {
-      location.href = '/';
+  const [login, { error }] = useMutation<{ login: NexusGenFieldTypes['Mutation']['login'] }>(
+    loginReq,
+    {
+      onSuccess: () => {
+        location.href = '/';
+      },
     },
-  });
+  );
 
   const onSubmit = values => {
     login(values);
   };
+
   return (
     <>
       <Head title="Войти" />
       <AuthWrapper>
         <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
-          <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm">
             <div>
-              <input
+              <TextInput
                 aria-label="Имя"
                 name="name"
                 type=""
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                 placeholder="Имя"
                 ref={register({ required: true })}
+                className="rounded-b-none"
               />
             </div>
             <div className="-mt-px">
-              <input
+              <TextInput
                 aria-label="Password"
                 name="password"
                 type="password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                className="rounded-t-none"
                 placeholder="Пароль"
                 ref={register({ required: true })}
               />
             </div>
           </div>
-
+          <div className="text-red-600 mt-2">{getGlobalError(error)}</div>
           <div className="mt-6">
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-              disabled={isSubmitting}
-            >
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
                   className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
@@ -75,8 +74,8 @@ const SignIn = () => {
                   />
                 </svg>
               </span>
-              Войти
-            </button>
+              {isSubmitting ? 'Подождите' : 'Войти'}
+            </Button>
           </div>
         </form>
       </AuthWrapper>

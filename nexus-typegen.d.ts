@@ -84,7 +84,7 @@ export interface NexusGenFieldTypes {
     summary: number | null; // Int
   }
   Mutation: { // field return type
-    createProduct: NexusGenRootTypes['Product'] | null; // Product
+    addProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
@@ -137,7 +137,7 @@ export interface NexusGenFieldTypeNames {
     summary: 'Int'
   }
   Mutation: { // field return type name
-    createProduct: 'Product'
+    addProduct: 'Product'
     login: 'AuthPayload'
     signup: 'AuthPayload'
   }
@@ -180,7 +180,7 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createProduct: { // args
+    addProduct: { // args
       count?: number | null; // Int
       name: string; // String!
       price: number; // Int!

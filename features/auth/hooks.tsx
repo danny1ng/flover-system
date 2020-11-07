@@ -1,11 +1,8 @@
-import { useMemo } from 'react';
-import { useMutation, useQueryCache } from 'react-query';
+import { useCallback, useMemo } from 'react';
+import { useQueryCache } from 'react-query';
 
 import { useCurrentUser } from 'features/user';
 
-import { redirect } from 'libs/redirect';
-
-import { logout } from './api';
 import { checkAuth } from './helpers';
 import { AuthParams } from './types';
 
@@ -23,11 +20,9 @@ export const useCheckAuth = (authParams: AuthParams) => {
 
 export const useLogout = () => {
   const queryCache = useQueryCache();
-  return () => redirect(null, '/sign-in');
-  // return useMutation(logout, {
-  //   onSuccess: () => {
-  //     queryCache.clear();
-  //     redirect(null, '/sign-in');
-  //   },
-  // });
+  return useCallback(() => {
+    queryCache.clear();
+    document.cookie = 'authorization=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    location.href = '/sign-in';
+  }, [queryCache]);
 };

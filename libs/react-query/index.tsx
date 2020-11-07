@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { ReactQueryCacheProvider, ReactQueryConfig, ReactQueryConfigProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
-
-import { redirect } from 'libs/redirect';
+import { redirect } from 'libs';
 
 import { graphQLClientClient } from '../client';
 
