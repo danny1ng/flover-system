@@ -1,12 +1,13 @@
 import { useQuery } from 'react-query';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 
+import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
 
 import { getProductsQuery } from '../api';
 import { Table } from '../organisms/table';
 
-export const DeductionsPage = () => {
+const Deductions = () => {
   const { data } = useQuery<{
     deductions: NexusGenFieldTypes['Query']['deductions'];
   }>([getProductsQuery, { storeId: 1 }]);
@@ -29,3 +30,5 @@ export const DeductionsPage = () => {
     </>
   );
 };
+
+export const DeductionsPage = withPageAuth({ roles: ['SELLER', 'ADMIN'] })(Deductions);
