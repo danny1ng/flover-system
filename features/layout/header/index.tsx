@@ -60,7 +60,7 @@ export const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="hidden md:block">
+            <div>
               <div className="ml-4 flex items-center md:ml-6">
                 {currentUser.role === 'ADMIN' ? (
                   <Select />
@@ -70,17 +70,19 @@ export const Header = () => {
                   </p>
                 )}
 
-                <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">
-                  {currentUser.name}
-                </p>
-                <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">|</p>
-                <a
-                  href="/sign-in"
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                  onClick={() => logout()}
-                >
-                  Выйти
-                </a>
+                <div className="items-center hidden md:flex">
+                  <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">
+                    {currentUser.name}
+                  </p>
+                  <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">|</p>
+                  <a
+                    href="/sign-in"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                    onClick={() => logout()}
+                  >
+                    Выйти
+                  </a>
+                </div>
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">

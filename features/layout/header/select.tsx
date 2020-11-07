@@ -32,7 +32,7 @@ export const Select = () => {
       <div className="flex">
         <button
           {...getToggleButtonProps()}
-          className="px-3 py-2 rounded-md text-sm font-medium text-gray-300"
+          className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 outline-none"
         >
           Точка: {selectedItem?.label}
         </button>
