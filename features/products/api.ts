@@ -15,8 +15,8 @@ export const getProductsQuery = gql`
 export const addProductReq = values =>
   graphQLClientClient.request(
     gql`
-      mutation addProduct($name: String!, $storeId: Int!, $price: Int!, $count: Int) {
-        addProduct(name: $name, storeId: $storeId, price: $price, count: $count) {
+      mutation addProduct($storeId: Int!, $price: Int!, $count: Int) {
+        addProduct(storeId: $storeId, price: $price, count: $count) {
           id
           name
         }

@@ -6,24 +6,25 @@ import { redirect } from 'libs';
 import { graphQLClientClient } from '../client';
 
 interface ReactQueryProviderProps {
-  config?: ReactQueryConfig<unknown, APIError>;
+  config?: ReactQueryConfig<unknown, unknown>;
   dehydratedState: unknown;
 }
 
-let isRedirecting = false;
+// let isRedirecting = false;
 
-const defaultConfig: ReactQueryConfig<unknown, APIError> = {
+const defaultConfig: ReactQueryConfig<unknown, unknown> = {
   queries: {
     queryFn: (gql, we) => graphQLClientClient.request(gql, we),
     // queryFn: (a, b) => request('/api', a, b),
-    onError: err => {
-      if (err && err.statusCode === 401 && !isRedirecting) {
-        isRedirecting = true;
-        redirect(null, '/sign-in').then(() => {
-          isRedirecting = false;
-        });
-      }
-    },
+    // onError: err => {
+    //   console.log('e', err);
+    //   if (err && err.statusCode === 401 && !isRedirecting) {
+    //     isRedirecting = true;
+    //     redirect(null, '/sign-in').then(() => {
+    //       isRedirecting = false;
+    //     });
+    //   }
+    // },
   },
 };
 
