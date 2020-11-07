@@ -15,6 +15,7 @@ export const AddProductForm = () => {
       redirect(null, '/products');
     },
   });
+
   const methods = useForm();
 
   const onSubmit = useCallback(
