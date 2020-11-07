@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Transition } from '@headlessui/react';
 
 import { useLogout } from 'features/auth';
 import { useCurrentUser } from 'features/user';
 
 import { MobileMenu } from './mobile-menu';
 import { links } from './nav-links';
+import { Select } from './select';
 
 export const Header = () => {
   const [isOpenMenu, isOpenMenuSet] = useState(false);
@@ -62,6 +62,8 @@ export const Header = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
+                <Select />
+
                 <p className="px-3 py-2 rounded-md text-sm font-medium text-gray-300">
                   {currentUser.name}
                 </p>

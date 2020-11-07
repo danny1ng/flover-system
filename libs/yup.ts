@@ -6,7 +6,7 @@ export const mixed = {
   oneOf: 'должно быть одно из следующих значений: ${values}',
   notOneOf: 'не должен быть одним из следующих значений: ${values}',
   notType: ({ type }) => {
-    const msg = `должен быть \`${type}\` тип, `;
+    const msg = `должен быть \`${type}\` тип`;
 
     return msg;
   },

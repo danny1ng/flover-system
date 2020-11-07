@@ -7,12 +7,12 @@ import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Button, FormField, TextInput } from 'ui';
 
 import { addProductReq } from 'features/products/api';
-import { useCurrentUser } from 'features/user';
+import { useStore } from 'features/store';
 
 import { schema } from './schema';
 
 export const AddProductForm = () => {
-  const { currentUser } = useCurrentUser();
+  const { storeId } = useStore();
   const [addProduct] = useMutation(addProductReq, {
     onSuccess: () => {
       redirect(null, '/products');
@@ -21,18 +21,16 @@ export const AddProductForm = () => {
 
   const methods = useForm({ resolver: yupResolver(schema) });
 
-  console.log('methods', methods.errors);
-
   const onSubmit = useCallback(
     (val: NexusGenFieldTypes['Product']) => {
       addProduct({
-        storeId: currentUser.stores[0].id,
+        storeId,
         name: val.name,
         count: Number(val.count),
         price: Number(val.price),
       });
     },
-    [addProduct, currentUser.stores],
+    [addProduct, storeId],
   );
 
   return (

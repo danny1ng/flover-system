@@ -6,4 +6,4 @@ export const config = {
   },
 };
 
-export default server;
+export default server();

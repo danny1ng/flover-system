@@ -21,6 +21,7 @@ export const useCheckAuth = (authParams: AuthParams) => {
 export const useLogout = () => {
   const queryCache = useQueryCache();
   return useCallback(() => {
+    // clearStore();
     queryCache.clear();
     document.cookie = 'authorization=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
     location.href = '/sign-in';

@@ -4,14 +4,16 @@ import { Button } from 'ui';
 
 import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
+import { useStore } from 'features/store';
 
 import { getProductsQuery } from '../api';
 import { Table } from '../organisms/table';
 
 const SaleList = () => {
+  const { storeId } = useStore();
   const { data } = useQuery<{
     products: NexusGenFieldTypes['Query']['products'];
-  }>([getProductsQuery, { storeId: 1 }]);
+  }>([getProductsQuery, { storeId }]);
   return (
     <>
       <Head title="Продажи за день" />
