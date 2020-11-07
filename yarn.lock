@@ -1691,7 +1691,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/yup@0.29.9":
+"@types/yup@0.29.9", "@types/yup@^0.29.9":
   version "0.29.9"
   resolved "https://registry.npmjs.org/@types/yup/-/yup-0.29.9.tgz#e2015187ae5739fd3b791b3b7ab9094f2aa5a474"
   integrity sha512-ZtjjlrHuHTYctHDz3c8XgInjj0v+Hahe32N/4cDa2banibf9w6aAgxwx0jZtBjKKzmGIU4NXhofEsBW1BbqrNg==
@@ -8831,8 +8831,3 @@ zen-observable@^0.8.0:
   version "0.8.15"
   resolved "https://registry.npmjs.org/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
-
-zod@^2.0.0-beta.16:
-  version "2.0.0-beta.16"
-  resolved "https://registry.npmjs.org/zod/-/zod-2.0.0-beta.16.tgz#1ca4bef96d951553b741fe29c708ded91d51169f"
-  integrity sha512-T5nksJPUQLc5jb3J0LEQ1lPjQxsLIhgaQcyWKnVn5NrwDLO8AnxnkyuqAegB9xhqvzx9F3WSBV3IP5RAncpavg==

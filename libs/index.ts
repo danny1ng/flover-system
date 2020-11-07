@@ -3,3 +3,4 @@ export * from './scroll-to';
 export * from './client';
 export * from './get-global-error';
 export * from './redirect';
+export * from './yup';

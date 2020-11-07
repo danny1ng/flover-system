@@ -26,6 +26,7 @@
     "@types/react-dom": "^16.9.9",
     "@types/react-query": "^1.1.2",
     "@types/react-table": "^7.0.25",
+    "@types/yup": "^0.29.9",
     "@zeit/next-css": "^1.0.1",
     "apollo-server-micro": "2.19.0",
     "astroturf": "^1.0.0-beta.15",
@@ -59,7 +60,7 @@
     "tailwindcss": "^1.9.6",
     "ts-node": "^9.0.0",
     "typescript": "4.0.5",
-    "zod": "^2.0.0-beta.16"
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@prisma/cli": "2.10.2",

@@ -1,12 +1,15 @@
 import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { redirect } from 'libs';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Button, FormField, TextInput } from 'ui';
 
 import { addProductReq } from 'features/products/api';
 import { useCurrentUser } from 'features/user';
+
+import { schema } from './schema';
 
 export const AddProductForm = () => {
   const { currentUser } = useCurrentUser();
@@ -16,7 +19,9 @@ export const AddProductForm = () => {
     },
   });
 
-  const methods = useForm();
+  const methods = useForm({ resolver: yupResolver(schema) });
+
+  console.log('methods', methods.errors);
 
   const onSubmit = useCallback(
     (val: NexusGenFieldTypes['Product']) => {

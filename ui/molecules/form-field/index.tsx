@@ -46,9 +46,7 @@ export function FormField<T = React.FunctionComponent>(props: FieldsetProps<T>) 
         </div>
       </label>
 
-      {errors && (
-        <p className="text-auxiliaryRed900 text-xs absolute pl-2">{get(errors, name)?.message}</p>
-      )}
+      {errors && <p className="text-red-600 text-xs absolute">{get(errors, name)?.message}</p>}
     </div>
   );
 }
