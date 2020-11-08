@@ -25,8 +25,8 @@ const SignIn = () => {
     },
   );
 
-  const onSubmit = values => {
-    login(values);
+  const onSubmit = async values => {
+    await login(values);
   };
 
   return (
@@ -74,7 +74,7 @@ const SignIn = () => {
                   />
                 </svg>
               </span>
-              {isSubmitting ? 'Подождите' : 'Войти'}
+              {isSubmitting ? 'Подождите...' : 'Войти'}
             </Button>
           </div>
         </form>

@@ -49,15 +49,14 @@ export const Select = () => {
             aria-labelledby="user-menu"
           >
             {storeOptions.map((item, index) => (
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              <li
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                 role="menuitem"
                 key={item.value}
                 {...getItemProps({ key: item.value, item, index })}
               >
                 {item.label}
-              </a>
+              </li>
             ))}
           </div>
         )}

@@ -20,16 +20,16 @@ const Products = () => {
       <Head title="Продажи за день" />
       <Layout pageTitle="Продажи за день">
         <div className="px-4 py-6 sm:px-0">
+          <div className="flex justify-end">
+            <Link href="/products/add" passHref>
+              <Button as="a" className="mb-4">
+                Добавить товар
+              </Button>
+            </Link>
+          </div>
           <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="flex justify-end">
-                  <Link href="/products/add" passHref>
-                    <Button as="a" className="mb-4">
-                      Добавить товар
-                    </Button>
-                  </Link>
-                </div>
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   {data?.products && <Table data={data.products} />}
                 </div>

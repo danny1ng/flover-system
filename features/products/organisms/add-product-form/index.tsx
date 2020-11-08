@@ -22,8 +22,8 @@ export const AddProductForm = () => {
   const methods = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = useCallback(
-    (val: NexusGenFieldTypes['Product']) => {
-      addProduct({
+    async (val: NexusGenFieldTypes['Product']) => {
+      await addProduct({
         storeId,
         name: val.name,
         count: Number(val.count),
@@ -50,7 +50,9 @@ export const AddProductForm = () => {
             label="Количество"
             defaultValue={1}
           />
-          <Button className="mt-4">Добавить</Button>
+          <Button className="mt-4" disabled={methods.formState.isSubmitting}>
+            {methods.formState.isSubmitting ? 'Подождите...' : 'Добавить'}
+          </Button>
         </form>
       </FormProvider>
     </div>

@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["transactionApi"]
 }
 
 datasource db {
@@ -14,6 +15,7 @@ model Store {
   balance   Int         @default(0)
   users     User[]      @relation(references: [id])
   deduction Deduction[]
+  sale      Sale[]
 }
 
 model User {
@@ -38,8 +40,11 @@ model Sale {
   id        Int      @id @default(autoincrement())
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
   count     Int
-  discount  Int?
+  summary   Int
+  discount  Int      @default(0)
   note      String?
   createdAt DateTime @default(now())
 }

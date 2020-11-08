@@ -50,7 +50,7 @@ export interface NexusGenRootTypes {
     createdAt?: string | null; // String
     discount?: number | null; // Int
     id?: number | null; // Int
-    note?: number | null; // Int
+    note?: string | null; // String
     summary?: number | null; // Int
   }
   Store: { // root type
@@ -85,8 +85,8 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addProduct: NexusGenRootTypes['Product'] | null; // Product
+    addSale: NexusGenRootTypes['Sale'] | null; // Sale
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
-    signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Product: { // field return type
     count: number | null; // Int
@@ -99,6 +99,7 @@ export interface NexusGenFieldTypes {
     deductions: Array<NexusGenRootTypes['Deduction'] | null> | null; // [Deduction]
     me: NexusGenRootTypes['User'] | null; // User
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    sales: Array<NexusGenRootTypes['Sale'] | null> | null; // [Sale]
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
     users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
@@ -107,8 +108,9 @@ export interface NexusGenFieldTypes {
     createdAt: string | null; // String
     discount: number | null; // Int
     id: number | null; // Int
-    note: number | null; // Int
+    note: string | null; // String
     product: NexusGenRootTypes['Product'] | null; // Product
+    store: NexusGenRootTypes['Store'] | null; // Store
     summary: number | null; // Int
   }
   Store: { // field return type
@@ -138,8 +140,8 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addProduct: 'Product'
+    addSale: 'Sale'
     login: 'AuthPayload'
-    signup: 'AuthPayload'
   }
   Product: { // field return type name
     count: 'Int'
@@ -152,6 +154,7 @@ export interface NexusGenFieldTypeNames {
     deductions: 'Deduction'
     me: 'User'
     products: 'Product'
+    sales: 'Sale'
     stores: 'Store'
     users: 'User'
   }
@@ -160,8 +163,9 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'String'
     discount: 'Int'
     id: 'Int'
-    note: 'Int'
+    note: 'String'
     product: 'Product'
+    store: 'Store'
     summary: 'Int'
   }
   Store: { // field return type name
@@ -186,12 +190,15 @@ export interface NexusGenArgTypes {
       price: number; // Int!
       storeId: number; // Int!
     }
+    addSale: { // args
+      count: number; // Int!
+      discount?: number | null; // Int
+      note?: string | null; // String
+      productId: number; // Int!
+      storeId: number; // Int!
+    }
     login: { // args
       name: string; // String!
-      password: string; // String!
-    }
-    signup: { // args
-      name?: string | null; // String
       password: string; // String!
     }
   }
@@ -200,6 +207,9 @@ export interface NexusGenArgTypes {
       storeId: number; // Int!
     }
     products: { // args
+      storeId: number; // Int!
+    }
+    sales: { // args
       storeId: number; // Int!
     }
   }
