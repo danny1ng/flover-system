@@ -7,14 +7,14 @@ import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
 import { useStore } from 'features/store';
 
-import { getProductsQuery } from '../api';
+import { getSalesQuery } from '../api';
 import { Table } from '../organisms/table';
 
 const SaleList = () => {
   const { storeId } = useStore();
   const { data } = useQuery<{
     sales: NexusGenFieldTypes['Query']['sales'];
-  }>([getProductsQuery, { storeId }]);
+  }>([getSalesQuery, { storeId }]);
   return (
     <>
       <Head title="Продажи за день" />

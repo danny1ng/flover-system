@@ -1,5 +1,7 @@
 import { Column, useTable } from 'react-table';
+import Link from 'next/link';
 import { NexusGenFieldTypes } from 'nexus-typegen';
+import { Icon } from 'ui';
 
 const columns: Column[] = [
   {
@@ -40,6 +42,7 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
                 {column.render('Header')}
               </th>
             ))}
+            <th />
           </tr>
         ))}
       </thead>
@@ -55,6 +58,22 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
                   </td>
                 );
               })}
+              <td className="w-32">
+                <Link href={`/products/edit/${(row.original as any).id}`} passHref>
+                  <a className="outline-none p-2">
+                    <Icon
+                      name="edit"
+                      className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"
+                    />
+                  </a>
+                </Link>
+                <button className="outline-none p-2">
+                  <Icon
+                    name="delete"
+                    className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"
+                  />
+                </button>
+              </td>
             </tr>
           );
         })}

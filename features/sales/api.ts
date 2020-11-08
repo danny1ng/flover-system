@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request';
 import { graphQLClientClient } from 'libs';
 
-export const getProductsQuery = gql`
+export const getSalesQuery = gql`
   query Sales($storeId: Int!) {
     sales(storeId: $storeId) {
       id

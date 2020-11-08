@@ -95,6 +95,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     addProduct: NexusGenRootTypes['Product'] | null; // Product
     addSale: NexusGenRootTypes['Sale'] | null; // Sale
+    editProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Product: { // field return type
@@ -107,6 +108,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     deductions: Array<NexusGenRootTypes['Deduction'] | null> | null; // [Deduction]
     me: NexusGenRootTypes['User'] | null; // User
+    product: NexusGenRootTypes['Product'] | null; // Product
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     sales: Array<NexusGenRootTypes['Sale'] | null> | null; // [Sale]
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
@@ -149,6 +151,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     addProduct: 'Product'
     addSale: 'Sale'
+    editProduct: 'Product'
     login: 'AuthPayload'
   }
   Product: { // field return type name
@@ -161,6 +164,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     deductions: 'Deduction'
     me: 'User'
+    product: 'Product'
     products: 'Product'
     sales: 'Sale'
     stores: 'Store'
@@ -204,6 +208,12 @@ export interface NexusGenArgTypes {
       productId: number; // Int!
       storeId: number; // Int!
     }
+    editProduct: { // args
+      count?: number | null; // Int
+      name?: string | null; // String
+      price?: number | null; // Int
+      productId: number; // Int!
+    }
     login: { // args
       name: string; // String!
       password: string; // String!
@@ -212,6 +222,9 @@ export interface NexusGenArgTypes {
   Query: {
     deductions: { // args
       storeId: number; // Int!
+    }
+    product: { // args
+      productId: number; // Int!
     }
     products: { // args
       storeId: number; // Int!

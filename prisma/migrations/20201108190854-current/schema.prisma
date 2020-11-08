@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["transactionApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+model Store {
+  id        Int         @id @default(autoincrement())
+  name      String
+  products  Product[]
+  balance   Int         @default(0)
+  users     User[]      @relation(references: [id])
+  deduction Deduction[]
+  sale      Sale[]
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  password String  @default("")
+  name     String  @unique
+  stores   Store[]
+  role     Role    @default(SELLER)
+}
+
+model Product {
+  id      Int    @id @default(autoincrement())
+  name    String
+  count   Float  @default(1)
+  store   Store  @relation(fields: [storeId], references: [id])
+  storeId Int
+  price   Int
+  sale    Sale[]
+}
+
+model Sale {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
+  count     Int
+  summary   Int
+  discount  Int      @default(0)
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model Deduction {
+  id        Int      @id @default(autoincrement())
+  message   String
+  summary   Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  SELLER
+}

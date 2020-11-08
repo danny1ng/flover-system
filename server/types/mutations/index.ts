@@ -1,10 +1,9 @@
-import { intArg, mutationField, mutationType, stringArg } from '@nexus/schema';
-import { PrismaClient } from '@prisma/client';
+import { intArg, mutationType, stringArg } from '@nexus/schema';
 import { compare, hash } from 'bcryptjs';
 import cookie from 'cookie';
 import { sign } from 'jsonwebtoken';
 
-import { APP_SECRET, getUserId } from '../../utils';
+import { APP_SECRET } from '../../utils';
 
 // const A = mutationField({})
 
@@ -76,6 +75,21 @@ export const Mutation = mutationType({
         });
       },
     });
+    t.field('editProduct', {
+      type: 'Product',
+      args: {
+        productId: intArg({ nullable: false }),
+        name: stringArg(),
+        price: intArg(),
+        count: intArg(),
+      },
+      resolve: async (_parent, { productId, ...product }, ctx) => {
+        return ctx.prisma.product.update({
+          where: { id: productId },
+          data: product,
+        });
+      },
+    });
     t.field('addSale', {
       type: 'Sale',
       args: {
@@ -101,7 +115,7 @@ export const Mutation = mutationType({
               connect: { id: storeId },
             },
           },
-        }) as any;
+        });
 
         const updatedProduct = ctx.prisma.product.update({
           where: { id: productId },

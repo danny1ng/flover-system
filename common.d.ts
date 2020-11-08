@@ -1,5 +1,3 @@
-import { Product } from '@prisma/client';
-
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.png';

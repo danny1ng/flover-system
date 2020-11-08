@@ -60,7 +60,7 @@ const SignIn = () => {
           </div>
           <div className="text-red-600 mt-2">{getGlobalError(error)}</div>
           <div className="mt-6">
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button type="submit" className="w-full group" disabled={isSubmitting}>
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
                   className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
