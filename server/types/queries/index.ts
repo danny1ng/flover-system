@@ -7,6 +7,7 @@ export const Query = queryType({
     t.field('me', {
       type: 'User',
       nullable: true,
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, args, ctx) => {
         const userId = getUserId(ctx);
 
@@ -20,15 +21,9 @@ export const Query = queryType({
 
     t.list.field('stores', {
       type: 'Store',
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, args, ctx) => {
         return ctx.prisma.store.findMany();
-      },
-    });
-
-    t.list.field('users', {
-      type: 'User',
-      resolve: (parent, args, ctx) => {
-        return ctx.prisma.user.findMany();
       },
     });
 
@@ -37,6 +32,7 @@ export const Query = queryType({
       args: {
         storeId: intArg({ nullable: false }),
       },
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, args, ctx) => {
         return ctx.prisma.deduction.findMany({
           where: { storeId: Number(args.storeId) },
@@ -49,6 +45,7 @@ export const Query = queryType({
       args: {
         storeId: intArg({ nullable: false }),
       },
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, args, ctx) => {
         return ctx.prisma.product.findMany({
           where: { storeId: Number(args.storeId) },
@@ -61,7 +58,7 @@ export const Query = queryType({
       args: {
         storeId: intArg({ nullable: false }),
       },
-      authorize: () => false,
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, { storeId }, ctx) => {
         return ctx.prisma.sale.findMany({ where: { storeId } }) as any;
       },

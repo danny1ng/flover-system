@@ -10,21 +10,15 @@ interface ReactQueryProviderProps {
   dehydratedState: unknown;
 }
 
-// let isRedirecting = false;
-
 const defaultConfig: ReactQueryConfig<unknown, unknown> = {
   queries: {
     queryFn: (gql, we) => graphQLClientClient.request(gql, we),
-    // queryFn: (a, b) => request('/api', a, b),
-    // onError: err => {
-    //   console.log('e', err);
-    //   if (err && err.statusCode === 401 && !isRedirecting) {
-    //     isRedirecting = true;
-    //     redirect(null, '/sign-in').then(() => {
-    //       isRedirecting = false;
-    //     });
-    //   }
-    // },
+    onError: err => {
+      const error = JSON.parse(JSON.stringify(err));
+      if (error?.response?.errors[0] && error?.response?.errors[0].message === 'Not authorized') {
+        redirect(null, '/sign-in').then(() => {});
+      }
+    },
   },
 };
 

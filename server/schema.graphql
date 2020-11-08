@@ -36,7 +36,6 @@ type Query {
   products(storeId: Int!): [Product]
   sales(storeId: Int!): [Sale]
   stores: [Store]
-  users: [User]
 }
 
 enum Role {

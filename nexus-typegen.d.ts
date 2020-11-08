@@ -110,7 +110,6 @@ export interface NexusGenFieldTypes {
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     sales: Array<NexusGenRootTypes['Sale'] | null> | null; // [Sale]
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
-    users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   Sale: { // field return type
     count: number; // Int!
@@ -165,7 +164,6 @@ export interface NexusGenFieldTypeNames {
     products: 'Product'
     sales: 'Sale'
     stores: 'Store'
-    users: 'User'
   }
   Sale: { // field return type name
     count: 'Int'
