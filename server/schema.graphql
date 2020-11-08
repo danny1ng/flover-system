@@ -16,8 +16,8 @@ type Deduction {
 
 type Mutation {
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
+  addSale(count: Int!, discount: Int, note: String, productId: Int!, storeId: Int!): Sale
   login(name: String!, password: String!): AuthPayload
-  signup(name: String, password: String!): AuthPayload
 }
 
 type Product {
@@ -32,6 +32,7 @@ type Query {
   deductions(storeId: Int!): [Deduction]
   me: User
   products(storeId: Int!): [Product]
+  sales(storeId: Int!): [Sale]
   stores: [Store]
   users: [User]
 }
@@ -41,8 +42,9 @@ type Sale {
   createdAt: String
   discount: Int
   id: Int
-  note: Int
+  note: String
   product: Product
+  store: Store
   summary: Int
 }
 

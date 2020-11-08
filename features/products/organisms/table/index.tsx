@@ -9,10 +9,16 @@ const columns: Column[] = [
   {
     Header: 'Цена',
     accessor: 'price',
+    Cell: ({ value }) => {
+      return value + ' р.';
+    },
   },
   {
     Header: 'Кол-во',
     accessor: 'count',
+    Cell: ({ value }) => {
+      return value + ' шт.';
+    },
   },
 ];
 

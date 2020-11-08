@@ -7,7 +7,7 @@ export const Sale = objectType({
     t.int('count');
     t.int('discount');
     t.int('summary');
-    t.int('note');
+    t.string('note');
     t.string('createdAt');
     t.field('product', {
       type: 'Product',
@@ -17,6 +17,15 @@ export const Sale = objectType({
             where: { id: Number(parent.id) },
           })
           .product(),
+    });
+    t.field('store', {
+      type: 'Store',
+      resolve: (parent, arg, ctx) =>
+        ctx.prisma.sale
+          .findOne({
+            where: { id: Number(parent.id) },
+          })
+          .store(),
     });
   },
 });

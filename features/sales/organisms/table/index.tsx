@@ -4,15 +4,32 @@ import { NexusGenFieldTypes } from 'nexus-typegen';
 const columns: Column[] = [
   {
     Header: 'Товар',
-    accessor: 'name', // accessor is the "key" in the data
-  },
-  {
-    Header: 'Цена',
-    accessor: 'price',
+    accessor: 'product.name', // accessor is the "key" in the data
   },
   {
     Header: 'Кол-во',
     accessor: 'count',
+    Cell: ({ value }) => {
+      return value + ' шт.';
+    },
+  },
+  {
+    Header: 'Сумма',
+    accessor: 'summary',
+    Cell: ({ value }) => {
+      return value + ' р.';
+    },
+  },
+  {
+    Header: 'Скидка',
+    accessor: 'discount',
+    Cell: ({ value }) => {
+      return value + ' р.';
+    },
+  },
+  {
+    Header: 'Примечание',
+    accessor: 'note',
   },
 ];
 
@@ -40,7 +57,9 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
       <tbody className="bg-white divide-y divide-gray-200" {...getTableBodyProps()}>
         <tr>
           <td className="px-6 py-4 whitespace-no-wrap font-bold">Касса</td>
+          <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap">2340</td>
+          <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />
         </tr>
         {rows.map((row, i) => {
