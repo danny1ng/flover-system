@@ -61,6 +61,7 @@ export const Query = queryType({
       args: {
         storeId: intArg({ nullable: false }),
       },
+      authorize: () => false,
       resolve: (parent, { storeId }, ctx) => {
         return ctx.prisma.sale.findMany({ where: { storeId } }) as any;
       },

@@ -1698,7 +1698,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/yup@0.29.9", "@types/yup@^0.29.9":
+"@types/yup@^0.29.9":
   version "0.29.9"
   resolved "https://registry.npmjs.org/@types/yup/-/yup-0.29.9.tgz#e2015187ae5739fd3b791b3b7ab9094f2aa5a474"
   integrity sha512-ZtjjlrHuHTYctHDz3c8XgInjj0v+Hahe32N/4cDa2banibf9w6aAgxwx0jZtBjKKzmGIU4NXhofEsBW1BbqrNg==
@@ -4584,13 +4584,6 @@ graphql-iso-date@3.6.1:
   resolved "https://registry.npmjs.org/graphql-iso-date/-/graphql-iso-date-3.6.1.tgz#bd2d0dc886e0f954cbbbc496bbf1d480b57ffa96"
   integrity sha512-AwFGIuYMJQXOEAgRlJlFL4H1ncFM8n8XmoVDTNypNOZyQ8LFDG2ppMFlsS862BSTCDcSUfHp8PD3/uJhv7t59Q==
 
-graphql-middleware@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/graphql-middleware/-/graphql-middleware-4.0.2.tgz#eb589bf428e1795e48cd6a3cfeeba0807b996ebd"
-  integrity sha512-ESVDvMXeN00S1BNsjNS18uExcR16J8zbT31CuKcpyeBa7IMbidG0Pnqnu5P1wKkJLmPmKOfCljWlhXpD/Fawqg==
-  dependencies:
-    graphql-tools "^4.0.5"
-
 graphql-request@^3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/graphql-request/-/graphql-request-3.3.0.tgz#1b9003f34b73cd40d691803d2d422fde5c713af3"
@@ -4600,21 +4593,12 @@ graphql-request@^3.3.0:
     extract-files "^9.0.0"
     form-data "^3.0.0"
 
-graphql-shield@^7.4.0:
-  version "7.4.0"
-  resolved "https://registry.npmjs.org/graphql-shield/-/graphql-shield-7.4.0.tgz#8f8f819c35e9729cc705a7d86ab8d752bf522f31"
-  integrity sha512-FV1gdzIZhUwalXBFB3ipAVnxqnHnW0oKlCo4+voyT0OqKcsOGeUsYuBloxW3+x3oa9DIIu503qk26SL2Xd3wcg==
-  dependencies:
-    "@types/yup" "0.29.9"
-    object-hash "^2.0.3"
-    yup "^0.29.3"
-
 graphql-tag@2.11.0, graphql-tag@^2.9.2:
   version "2.11.0"
   resolved "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.11.0.tgz#1deb53a01c46a7eb401d6cb59dec86fa1cccbffd"
   integrity sha512-VmsD5pJqWJnQZMUeRwrDhfgoyqcfwEkvtpANqcoUG8/tOLkwNgU9mzub/Mc78OJMhHjx7gfAMTxzdG43VGg3bA==
 
-graphql-tools@^4.0.0, graphql-tools@^4.0.5:
+graphql-tools@^4.0.0:
   version "4.0.8"
   resolved "https://registry.npmjs.org/graphql-tools/-/graphql-tools-4.0.8.tgz#e7fb9f0d43408fb0878ba66b522ce871bafe9d30"
   integrity sha512-MW+ioleBrwhRjalKjYaLQbr+920pHBgy9vM/n47sswtns8+96sRn5M/G+J1eu7IMeKWiN/9p6tmwCHU7552VJg==
@@ -5996,11 +5980,6 @@ nexus-plugin-prisma@^0.23.1:
     outdent "^0.7.1"
     pluralize "^8.0.0"
     semver "^7.3.2"
-
-nexus-prisma@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.npmjs.org/nexus-prisma/-/nexus-prisma-0.16.2.tgz#c2923f97c7565352eb532190ea46873a4982c9de"
-  integrity sha512-vtEtYrdpu+IG5oFtsbVdHA+Sd+Zm51qMURtXkVC1VIcEJ8Zj+xGe9at2nsU9g/QcRwx4t0DcQIdXTd8pu+thmQ==
 
 node-abi@^2.7.0:
   version "2.19.1"
