@@ -3,12 +3,12 @@ import { objectType } from '@nexus/schema';
 export const Sale = objectType({
   name: 'Sale',
   definition(t) {
-    t.int('id');
-    t.int('count');
-    t.int('discount');
-    t.int('summary');
-    t.string('note');
-    t.string('createdAt');
+    t.model.id();
+    t.model.count();
+    t.model.discount();
+    t.model.summary();
+    t.model.note();
+    t.model.createdAt();
     t.field('product', {
       type: 'Product',
       resolve: (parent, arg, ctx) =>

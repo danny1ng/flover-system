@@ -7,11 +7,13 @@ type AuthPayload {
   user: User
 }
 
+scalar DateTime
+
 type Deduction {
-  id: Int
-  message: String
+  id: Int!
+  message: String!
   store: Store
-  summary: Int
+  summary: Int!
 }
 
 type Mutation {
@@ -21,10 +23,10 @@ type Mutation {
 }
 
 type Product {
-  count: Int
-  id: Int
-  name: String
-  price: Int
+  count: Float!
+  id: Int!
+  name: String!
+  price: Int!
   store: Store
 }
 
@@ -37,27 +39,32 @@ type Query {
   users: [User]
 }
 
+enum Role {
+  ADMIN
+  SELLER
+}
+
 type Sale {
-  count: Int
-  createdAt: String
-  discount: Int
-  id: Int
+  count: Int!
+  createdAt: DateTime!
+  discount: Int!
+  id: Int!
   note: String
   product: Product
   store: Store
-  summary: Int
+  summary: Int!
 }
 
 type Store {
-  id: Int
-  name: String
+  id: Int!
+  name: String!
   products: [Product]
   users: [User]
 }
 
 type User {
-  id: Float
-  name: String
-  role: String
+  id: Int!
+  name: String!
+  role: Role!
   stores: [Store]
 }

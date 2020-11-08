@@ -3,9 +3,9 @@ import { objectType } from '@nexus/schema';
 export const User = objectType({
   name: 'User',
   definition(t) {
-    t.float('id');
-    t.string('name');
-    t.string('role');
+    t.model.id();
+    t.model.name();
+    t.model.role();
     t.list.field('stores', {
       type: 'Store',
       resolve: (parent, arg, ctx) =>

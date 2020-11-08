@@ -7,7 +7,12 @@ import * as Context from "./server/context"
 
 
 
-
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    model: NexusPrisma<TypeName, 'model'>
+    crud: any
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -17,6 +22,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Role: "ADMIN" | "SELLER"
 }
 
 export interface NexusGenScalars {
@@ -25,6 +31,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenRootTypes {
@@ -33,43 +40,45 @@ export interface NexusGenRootTypes {
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Deduction: { // root type
-    id?: number | null; // Int
-    message?: string | null; // String
-    summary?: number | null; // Int
+    id: number; // Int!
+    message: string; // String!
+    summary: number; // Int!
   }
   Mutation: {};
   Product: { // root type
-    count?: number | null; // Int
-    id?: number | null; // Int
-    name?: string | null; // String
-    price?: number | null; // Int
+    count: number; // Float!
+    id: number; // Int!
+    name: string; // String!
+    price: number; // Int!
   }
   Query: {};
   Sale: { // root type
-    count?: number | null; // Int
-    createdAt?: string | null; // String
-    discount?: number | null; // Int
-    id?: number | null; // Int
+    count: number; // Int!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    discount: number; // Int!
+    id: number; // Int!
     note?: string | null; // String
-    summary?: number | null; // Int
+    summary: number; // Int!
   }
   Store: { // root type
-    id?: number | null; // Int
-    name?: string | null; // String
+    id: number; // Int!
+    name: string; // String!
   }
   User: { // root type
-    id?: number | null; // Float
-    name?: string | null; // String
-    role?: string | null; // String
+    id: number; // Int!
+    name: string; // String!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  Role: NexusGenEnums['Role'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
   Boolean: NexusGenScalars['Boolean'];
   ID: NexusGenScalars['ID'];
+  DateTime: NexusGenScalars['DateTime'];
 }
 
 export interface NexusGenFieldTypes {
@@ -78,10 +87,10 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Deduction: { // field return type
-    id: number | null; // Int
-    message: string | null; // String
+    id: number; // Int!
+    message: string; // String!
     store: NexusGenRootTypes['Store'] | null; // Store
-    summary: number | null; // Int
+    summary: number; // Int!
   }
   Mutation: { // field return type
     addProduct: NexusGenRootTypes['Product'] | null; // Product
@@ -89,10 +98,10 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Product: { // field return type
-    count: number | null; // Int
-    id: number | null; // Int
-    name: string | null; // String
-    price: number | null; // Int
+    count: number; // Float!
+    id: number; // Int!
+    name: string; // String!
+    price: number; // Int!
     store: NexusGenRootTypes['Store'] | null; // Store
   }
   Query: { // field return type
@@ -104,25 +113,25 @@ export interface NexusGenFieldTypes {
     users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   Sale: { // field return type
-    count: number | null; // Int
-    createdAt: string | null; // String
-    discount: number | null; // Int
-    id: number | null; // Int
+    count: number; // Int!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    discount: number; // Int!
+    id: number; // Int!
     note: string | null; // String
     product: NexusGenRootTypes['Product'] | null; // Product
     store: NexusGenRootTypes['Store'] | null; // Store
-    summary: number | null; // Int
+    summary: number; // Int!
   }
   Store: { // field return type
-    id: number | null; // Int
-    name: string | null; // String
+    id: number; // Int!
+    name: string; // String!
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     users: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   User: { // field return type
-    id: number | null; // Float
-    name: string | null; // String
-    role: string | null; // String
+    id: number; // Int!
+    name: string; // String!
+    role: NexusGenEnums['Role']; // Role!
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
   }
 }
@@ -144,7 +153,7 @@ export interface NexusGenFieldTypeNames {
     login: 'AuthPayload'
   }
   Product: { // field return type name
-    count: 'Int'
+    count: 'Float'
     id: 'Int'
     name: 'String'
     price: 'Int'
@@ -160,7 +169,7 @@ export interface NexusGenFieldTypeNames {
   }
   Sale: { // field return type name
     count: 'Int'
-    createdAt: 'String'
+    createdAt: 'DateTime'
     discount: 'Int'
     id: 'Int'
     note: 'String'
@@ -175,9 +184,9 @@ export interface NexusGenFieldTypeNames {
     users: 'User'
   }
   User: { // field return type name
-    id: 'Float'
+    id: 'Int'
     name: 'String'
-    role: 'String'
+    role: 'Role'
     stores: 'Store'
   }
 }
@@ -224,11 +233,11 @@ export type NexusGenObjectNames = "AuthPayload" | "Deduction" | "Mutation" | "Pr
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "Role";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

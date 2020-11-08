@@ -3,10 +3,10 @@ import { objectType } from '@nexus/schema';
 export const Product = objectType({
   name: 'Product',
   definition(t) {
-    t.int('id');
-    t.string('name');
-    t.int('price');
-    t.int('count');
+    t.model.id();
+    t.model.name();
+    t.model.price();
+    t.model.count();
     t.field('store', {
       type: 'Store',
       resolve: (parent, arg, ctx) =>

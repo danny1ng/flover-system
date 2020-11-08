@@ -1,10 +1,12 @@
-import { intArg, mutationType, stringArg } from '@nexus/schema';
+import { intArg, mutationField, mutationType, stringArg } from '@nexus/schema';
 import { PrismaClient } from '@prisma/client';
 import { compare, hash } from 'bcryptjs';
 import cookie from 'cookie';
 import { sign } from 'jsonwebtoken';
 
 import { APP_SECRET, getUserId } from '../../utils';
+
+// const A = mutationField({})
 
 export const Mutation = mutationType({
   definition(t) {
