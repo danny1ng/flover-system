@@ -1,4 +1,6 @@
 import { Column, useTable } from 'react-table';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 
 const columns: Column[] = [
@@ -31,6 +33,13 @@ const columns: Column[] = [
     Header: 'Примечание',
     accessor: 'note',
   },
+  {
+    Header: 'Время',
+    accessor: 'createdAt',
+    Cell: ({ value }) => {
+      return format(new Date(value), 'MM/dd/yyyy p', { locale: ru });
+    },
+  },
 ];
 
 export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) => {
@@ -61,14 +70,21 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) 
           <td className="px-6 py-4 whitespace-no-wrap">2340</td>
           <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />
+          <td className="px-6 py-4 whitespace-no-wrap" />
         </tr>
         {rows.map((row, i) => {
           prepareRow(row);
           return (
             <tr key={i} {...row.getRowProps()}>
-              {row.cells.map((cell, i) => {
+              {row.cells.map((cell, index) => {
+                console.log('row.cells.length ', row.cells.length, index);
                 return (
-                  <td key={i} {...cell.getCellProps()} className="px-6 py-4 whitespace-no-wrap">
+                  <td
+                    key={index}
+                    {...cell.getCellProps()}
+                    className="px-6 py-4 whitespace-no-wrap"
+                    style={{ width: row.cells.length === index + 1 ? 120 : 'auto' }}
+                  >
                     {cell.render('Cell')}
                   </td>
                 );
