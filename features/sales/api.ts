@@ -9,6 +9,7 @@ export const getSalesQuery = gql`
       discount
       note
       summary
+      payType
       createdAt
       product {
         name
@@ -25,8 +26,8 @@ export const getSalesQuery = gql`
 export const addSaleReq = values =>
   graphQLClientClient.request(
     gql`
-      mutation addSale($storeId: Int!, $productId: Int!, $count: Int!) {
-        addSale(storeId: $storeId, productId: $productId, count: $count) {
+      mutation addSale($storeId: Int!, $productId: Int!, $count: Int!, $payType: payType) {
+        addSale(storeId: $storeId, productId: $productId, count: $count, payType: $payType) {
           id
           product {
             name

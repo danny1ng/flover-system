@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["transactionApi"]
 }
 
 datasource db {
@@ -46,6 +45,7 @@ model Sale {
   summary   Int
   discount  Int      @default(0)
   note      String?
+  payType   PayType  @default(CASH)
   createdAt DateTime @default(now())
 }
 
@@ -61,4 +61,9 @@ model Deduction {
 enum Role {
   ADMIN
   SELLER
+}
+
+enum PayType {
+  CASH
+  WIRE
 }

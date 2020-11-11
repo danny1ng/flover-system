@@ -15,8 +15,8 @@ const Deductions = () => {
   }>([getDeductionsQuery, { storeId }]);
   return (
     <>
-      <Head title="Продажи за день" />
-      <Layout pageTitle="Продажи за день">
+      <Head title="Вычеты" />
+      <Layout pageTitle="Вычеты">
         <div className="px-4 py-6 sm:px-0">
           <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

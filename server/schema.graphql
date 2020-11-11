@@ -18,9 +18,19 @@ type Deduction {
 
 type Mutation {
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
-  addSale(count: Int!, discount: Int, note: String, productId: Int!, storeId: Int!): Sale
+  addSale(count: Int!, discount: Int, note: String, payType: payType, productId: Int!, storeId: Int!): Sale
   editProduct(count: Int, name: String, price: Int, productId: Int!): Product
   login(name: String!, password: String!): AuthPayload
+}
+
+enum payType {
+  CASH
+  WIRE
+}
+
+enum PayType {
+  CASH
+  WIRE
 }
 
 type Product {
@@ -51,6 +61,7 @@ type Sale {
   discount: Int!
   id: Int!
   note: String
+  payType: PayType!
   product: Product
   store: Store
   summary: Int!

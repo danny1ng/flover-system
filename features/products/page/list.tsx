@@ -17,8 +17,8 @@ const Products = () => {
   }>([getProductsQuery, { storeId }]);
   return (
     <>
-      <Head title="Продажи за день" />
-      <Layout pageTitle="Продажи за день">
+      <Head title="Товары" />
+      <Layout pageTitle="Товары">
         <div className="px-4 py-6 sm:px-0">
           <div className="flex justify-end">
             <Link href="/products/add" passHref>

@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { redirect } from 'libs';
 import { NexusGenFieldTypes } from 'nexus-typegen';
-import { Button, FormField, Select, TextInput } from 'ui';
+import { Button, FormField, Radio, Select, TextInput } from 'ui';
 
 import { getProductsQuery } from 'features/products/api';
 import { addSaleReq } from 'features/sales/api';
@@ -39,6 +39,7 @@ export const AddSaleForm = () => {
         storeId,
         productId: Number(val.productId),
         count: Number(val.count),
+        payType: val.payType,
       });
     },
     [addSale, storeId],
@@ -60,7 +61,6 @@ export const AddSaleForm = () => {
             items={selectProductOptions}
             controlled
           />
-          <FormField component={TextInput} className="mb-2" name="note" label="Заметка" />
           <FormField component={TextInput} className="mb-2" name="discount" label="Сумма скидки" />
           <FormField
             component={TextInput}
@@ -69,6 +69,11 @@ export const AddSaleForm = () => {
             label="Количество"
             defaultValue={1}
           />
+          <FormField component={TextInput} className="mb-2" name="note" label="Заметка" />
+          <div className="flex mb-4">
+            <Radio label="Безнал." name="payType" className="mr-4" value="WIRE" />
+            <Radio label="Нал." name="payType" value="CASH" />
+          </div>
           <Button className="mt-4" disabled={methods.formState.isSubmitting}>
             {methods.formState.isSubmitting ? 'Подождите...' : 'Добавить'}
           </Button>

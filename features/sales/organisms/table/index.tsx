@@ -30,6 +30,13 @@ const columns: Column[] = [
     },
   },
   {
+    Header: 'Вид оплаты',
+    accessor: 'payType',
+    Cell: ({ value }) => {
+      return value === 'CASH' ? 'Нал.' : 'Безнал.';
+    },
+  },
+  {
     Header: 'Примечание',
     accessor: 'note',
   },
@@ -71,13 +78,13 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) 
           <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />
+          <td className="px-6 py-4 whitespace-no-wrap" />
         </tr>
         {rows.map((row, i) => {
           prepareRow(row);
           return (
             <tr key={i} {...row.getRowProps()}>
               {row.cells.map((cell, index) => {
-                console.log('row.cells.length ', row.cells.length, index);
                 return (
                   <td
                     key={index}

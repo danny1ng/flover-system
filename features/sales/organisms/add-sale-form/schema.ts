@@ -5,6 +5,7 @@ export const schema = yup
   .shape({
     productId: yup.number().required(),
     count: yup.number().required().positive(),
+    payType: yup.string().required(),
     discount: yup
       .number()
       .transform(val => {

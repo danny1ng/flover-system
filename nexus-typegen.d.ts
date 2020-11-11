@@ -22,7 +22,9 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  PayType: "CASH" | "WIRE"
   Role: "ADMIN" | "SELLER"
+  payType: "CASH" | "WIRE"
 }
 
 export interface NexusGenScalars {
@@ -58,6 +60,7 @@ export interface NexusGenRootTypes {
     discount: number; // Int!
     id: number; // Int!
     note?: string | null; // String
+    payType: NexusGenEnums['PayType']; // PayType!
     summary: number; // Int!
   }
   Store: { // root type
@@ -72,7 +75,9 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  PayType: NexusGenEnums['PayType'];
   Role: NexusGenEnums['Role'];
+  payType: NexusGenEnums['payType'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -119,6 +124,7 @@ export interface NexusGenFieldTypes {
     discount: number; // Int!
     id: number; // Int!
     note: string | null; // String
+    payType: NexusGenEnums['PayType']; // PayType!
     product: NexusGenRootTypes['Product'] | null; // Product
     store: NexusGenRootTypes['Store'] | null; // Store
     summary: number; // Int!
@@ -175,6 +181,7 @@ export interface NexusGenFieldTypeNames {
     discount: 'Int'
     id: 'Int'
     note: 'String'
+    payType: 'PayType'
     product: 'Product'
     store: 'Store'
     summary: 'Int'
@@ -205,6 +212,7 @@ export interface NexusGenArgTypes {
       count: number; // Int!
       discount?: number | null; // Int
       note?: string | null; // String
+      payType?: NexusGenEnums['payType'] | null; // payType
       productId: number; // Int!
       storeId: number; // Int!
     }
@@ -244,7 +252,7 @@ export type NexusGenObjectNames = "AuthPayload" | "Deduction" | "Mutation" | "Pr
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = "Role";
+export type NexusGenEnumNames = "PayType" | "Role" | "payType";
 
 export type NexusGenInterfaceNames = never;
 

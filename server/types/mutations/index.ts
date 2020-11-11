@@ -1,4 +1,4 @@
-import { intArg, mutationType, stringArg } from '@nexus/schema';
+import { enumType, intArg, mutationType, stringArg } from '@nexus/schema';
 import { compare, hash } from 'bcryptjs';
 import cookie from 'cookie';
 import { sign } from 'jsonwebtoken';
@@ -98,6 +98,7 @@ export const Mutation = mutationType({
         count: intArg({ nullable: false }),
         discount: intArg(),
         note: stringArg(),
+        payType: enumType({ name: 'payType', members: ['WIRE', 'CASH'] }),
       },
       resolve: async (_parent, { storeId, productId, discount, count, ...sale }, ctx) => {
         const product = await ctx.prisma.product.findOne({ where: { id: productId } });

@@ -7,6 +7,7 @@ export const Sale = objectType({
     t.model.count();
     t.model.discount();
     t.model.summary();
+    t.model.payType();
     t.model.note();
     t.model.createdAt();
     t.field('product', {
