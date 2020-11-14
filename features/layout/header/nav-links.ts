@@ -8,6 +8,10 @@ export const links = [
     href: '/deductions',
   },
   {
+    label: 'Приход товара',
+    href: '/incoming-goods',
+  },
+  {
     label: 'Товары',
     href: '/products',
   },

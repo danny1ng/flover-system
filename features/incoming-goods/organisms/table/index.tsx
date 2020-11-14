@@ -3,12 +3,10 @@ import Link from 'next/link';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Icon } from 'ui';
 
-import { useCurrentUser } from 'features/user';
-
 const columns: Column[] = [
   {
     Header: 'Товар',
-    accessor: 'name',
+    accessor: 'name', // accessor is the "key" in the data
   },
   {
     Header: 'Цена',
@@ -27,7 +25,6 @@ const columns: Column[] = [
 ];
 
 export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] }) => {
-  const { currentUser } = useCurrentUser();
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
@@ -45,7 +42,7 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
                 {column.render('Header')}
               </th>
             ))}
-            {currentUser.role === 'ADMIN' && <th />}
+            <th />
           </tr>
         ))}
       </thead>
@@ -61,24 +58,22 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
                   </td>
                 );
               })}
-              {currentUser.role === 'ADMIN' && (
-                <td className="w-32">
-                  <Link href={`/products/edit/${(row.original as any).id}`} passHref>
-                    <a className="outline-none p-2">
-                      <Icon
-                        name="edit"
-                        className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"
-                      />
-                    </a>
-                  </Link>
-                  <button className="outline-none p-2">
+              <td className="w-32">
+                <Link href={`/products/edit/${(row.original as any).id}`} passHref>
+                  <a className="outline-none p-2">
                     <Icon
-                      name="delete"
+                      name="edit"
                       className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"
                     />
-                  </button>
-                </td>
-              )}
+                  </a>
+                </Link>
+                <button className="outline-none p-2">
+                  <Icon
+                    name="delete"
+                    className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"
+                  />
+                </button>
+              </td>
             </tr>
           );
         })}
