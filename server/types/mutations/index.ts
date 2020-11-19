@@ -61,6 +61,19 @@ export const Mutation = mutationType({
         };
       },
     });
+    t.field('addDeduction', {
+      type: 'Deduction',
+      args: {
+        storeId: intArg({ nullable: false }),
+        message: stringArg({ nullable: false }),
+        summary: intArg({ nullable: false }),
+      },
+      resolve: async (_parent, { storeId, message, summary }, ctx) => {
+        return ctx.prisma.deduction.create({
+          data: { message, summary, store: { connect: { id: storeId } } },
+        });
+      },
+    });
     t.field('addProduct', {
       type: 'Product',
       args: {

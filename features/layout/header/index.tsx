@@ -44,19 +44,21 @@ export const Header = () => {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  {links.map(link => (
-                    <Link key={link.label} href={link.href} passHref>
-                      <a
-                        className={`px-3 py-2 rounded-md text-sm font-medium ${
-                          asPath === link.href
-                            ? 'text-white bg-gray-900'
-                            : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                        } focus:outline-none focus:text-white focus:bg-gray-700`}
-                      >
-                        {link.label}
-                      </a>
-                    </Link>
-                  ))}
+                  {links
+                    .filter(item => item.role.find(role => currentUser.role === role))
+                    .map(link => (
+                      <Link key={link.label} href={link.href} passHref>
+                        <a
+                          className={`px-3 py-2 rounded-md text-sm font-medium ${
+                            asPath === link.href
+                              ? 'text-white bg-gray-900'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          } focus:outline-none focus:text-white focus:bg-gray-700`}
+                        >
+                          {link.label}
+                        </a>
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

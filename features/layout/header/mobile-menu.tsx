@@ -14,19 +14,21 @@ export const MobileMenu = ({ isOpenMenu }: { isOpenMenu: boolean }) => {
   return (
     <div className={`${isOpenMenu ? 'block' : 'hidden'} md:hidden`}>
       <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        {links.map(link => (
-          <Link key={link.label} href={link.href} passHref>
-            <a
-              className={`block px-3 py-2 rounded-md text-base font-medium ${
-                asPath === link.href
-                  ? 'text-white bg-gray-900'
-                  : 'text-gray-300 hover:text-white hover:bg-gray-700'
-              } focus:outline-none focus:text-white focus:bg-gray-700`}
-            >
-              {link.label}
-            </a>
-          </Link>
-        ))}
+        {links
+          .filter(item => item.role.find(role => currentUser.role === role))
+          .map(link => (
+            <Link key={link.label} href={link.href} passHref>
+              <a
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  asPath === link.href
+                    ? 'text-white bg-gray-900'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                } focus:outline-none focus:text-white focus:bg-gray-700`}
+              >
+                {link.label}
+              </a>
+            </Link>
+          ))}
       </div>
       <div className="pt-4 pb-3 border-t border-gray-700">
         <div className="flex items-center px-5 space-x-3">

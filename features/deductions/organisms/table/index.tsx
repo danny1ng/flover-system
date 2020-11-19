@@ -9,6 +9,9 @@ const columns: Column[] = [
   {
     Header: 'Сумма',
     accessor: 'summary',
+    Cell: ({ value }) => {
+      return value + ' р.';
+    },
   },
 ];
 
