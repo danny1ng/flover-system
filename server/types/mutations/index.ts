@@ -39,7 +39,7 @@ export const Mutation = mutationType({
       resolve: async (_parent, { name, password }, ctx) => {
         const user = await ctx.prisma.user.findOne({
           where: {
-            name,
+            name: name.toLowerCase(),
           },
         });
         if (!user) {
@@ -69,10 +69,19 @@ export const Mutation = mutationType({
         price: intArg({ nullable: false }),
         count: intArg(),
       },
-      resolve: async (_parent, { storeId, ...product }, ctx) => {
+      resolve: async (_parent, { storeId, name, ...product }, ctx) => {
         return ctx.prisma.product.create({
-          data: { ...product, store: { connect: { id: storeId } } },
+          data: { ...product, name: name.toLowerCase(), store: { connect: { id: storeId } } },
         });
+      },
+    });
+    t.field('deleteProduct', {
+      type: 'Product',
+      args: {
+        productId: intArg({ nullable: false }),
+      },
+      resolve: async (_parent, { productId }, ctx) => {
+        return ctx.prisma.product.delete({ where: { id: productId } });
       },
     });
     t.field('editProduct', {
@@ -83,10 +92,10 @@ export const Mutation = mutationType({
         price: intArg(),
         count: intArg(),
       },
-      resolve: async (_parent, { productId, ...product }, ctx) => {
+      resolve: async (_parent, { productId, name, ...product }, ctx) => {
         return ctx.prisma.product.update({
           where: { id: productId },
-          data: product,
+          data: { ...product, name: name.toLowerCase() },
         });
       },
     });
@@ -106,12 +115,10 @@ export const Mutation = mutationType({
         const createdSale = ctx.prisma.sale.create({
           data: {
             ...sale,
+            name: product.name,
             count,
             discount,
             summary: product.price * count - (discount || 0),
-            product: {
-              connect: { id: productId },
-            },
             store: {
               connect: { id: storeId },
             },

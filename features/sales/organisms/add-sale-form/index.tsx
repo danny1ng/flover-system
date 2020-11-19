@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { redirect } from 'libs';
@@ -13,7 +13,7 @@ import { useStore } from 'features/store';
 import { SaleForm, schema } from './schema';
 
 export const AddSaleForm = () => {
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const methods = useForm({ resolver: yupResolver(schema), defaultValues: { payType: 'CASH' } });
   const { storeId } = useStore();
   const [addSale] = useMutation(addSaleReq, {
     onSuccess: () => {

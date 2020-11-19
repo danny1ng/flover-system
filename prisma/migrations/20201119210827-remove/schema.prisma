@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model Store {
@@ -50,7 +50,7 @@ model Sale {
   store     Store    @relation(fields: [storeId], references: [id])
   storeId   Int
   count     Int
-  name      String   @default("")
+  name      String
   summary   Int
   discount  Int      @default(0)
   note      String?

@@ -11,10 +11,7 @@ export const getSalesQuery = gql`
       summary
       payType
       createdAt
-      product {
-        name
-        price
-      }
+      name
       store {
         id
         name
@@ -29,9 +26,7 @@ export const addSaleReq = values =>
       mutation addSale($storeId: Int!, $productId: Int!, $count: Int!, $payType: payType) {
         addSale(storeId: $storeId, productId: $productId, count: $count, payType: $payType) {
           id
-          product {
-            name
-          }
+          name
         }
       }
     `,

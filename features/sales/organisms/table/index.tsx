@@ -6,7 +6,7 @@ import { NexusGenFieldTypes } from 'nexus-typegen';
 const columns: Column[] = [
   {
     Header: 'Товар',
-    accessor: 'product.name', // accessor is the "key" in the data
+    accessor: 'name',
   },
   {
     Header: 'Кол-во',

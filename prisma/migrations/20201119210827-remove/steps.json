@@ -1,0 +1,27 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "Product",
+      "field": "sale"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Sale",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Sale",
+      "field": "product"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Sale",
+      "field": "productId"
+    }
+  ]
+}

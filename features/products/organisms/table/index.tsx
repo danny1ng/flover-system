@@ -1,9 +1,12 @@
+import { useMutation, useQueryCache } from 'react-query';
 import { Column, useTable } from 'react-table';
 import Link from 'next/link';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Icon } from 'ui';
 
 import { useCurrentUser } from 'features/user';
+
+import { deleteProductReq, getProductsQuery } from '../../api';
 
 const columns: Column[] = [
   {
@@ -27,9 +30,15 @@ const columns: Column[] = [
 ];
 
 export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] }) => {
+  const queryCache = useQueryCache();
   const { currentUser } = useCurrentUser();
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const [deleteProduct] = useMutation(deleteProductReq, {
+    onSuccess: () => {
+      queryCache.invalidateQueries([getProductsQuery, { storeId: 1 }]);
+    },
+  });
 
   return (
     <table className="min-w-full divide-y divide-gray-200" {...getTableProps()}>
@@ -71,7 +80,10 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] 
                       />
                     </a>
                   </Link>
-                  <button className="outline-none p-2">
+                  <button
+                    className="outline-none p-2"
+                    onClick={() => deleteProduct({ productId: Number((row.original as any).id) })}
+                  >
                     <Icon
                       name="delete"
                       className="-ml-1 mr-2 h-5 w-5 text-indigo-600 hover:text-indigo-900"

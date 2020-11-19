@@ -29,6 +29,7 @@ type Mutation {
   addIncomingGood(count: Int!, name: String, price: Int, productId: Int, storeId: Int!): IncomingGood
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
   addSale(count: Int!, discount: Int, note: String, payType: payType, productId: Int!, storeId: Int!): Sale
+  deleteProduct(productId: Int!): Product
   editProduct(count: Int, name: String, price: Int, productId: Int!): Product
   login(name: String!, password: String!): AuthPayload
 }
@@ -71,9 +72,9 @@ type Sale {
   createdAt: DateTime!
   discount: Int!
   id: Int!
+  name: String!
   note: String
   payType: PayType!
-  product: Product
   store: Store
   summary: Int!
 }

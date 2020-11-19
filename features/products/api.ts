@@ -48,3 +48,15 @@ export const editProductReq = values =>
     `,
     values,
   );
+export const deleteProductReq = values =>
+  graphQLClientClient.request(
+    gql`
+      mutation deleteProduct($productId: Int!) {
+        deleteProduct(productId: $productId) {
+          id
+          name
+        }
+      }
+    `,
+    values,
+  );

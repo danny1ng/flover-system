@@ -1,1 +1,1 @@
-drop table "User" CASCADE; 
+drop table "Sale" CASCADE; 
