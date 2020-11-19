@@ -3,11 +3,12 @@ import { graphQLClientClient } from 'libs';
 
 export const getIncomingGoodsQuery = gql`
   query Products($storeId: Int!) {
-    products(storeId: $storeId) {
+    incomingGoods(storeId: $storeId) {
       id
       name
       price
       count
+      createdAt
     }
   }
 `;
@@ -26,8 +27,20 @@ export const getIncomingGoodQuery = gql`
 export const addIncomingGoodReq = values =>
   graphQLClientClient.request(
     gql`
-      mutation addProduct($name: String!, $storeId: Int!, $price: Int!, $count: Int) {
-        addProduct(name: $name, storeId: $storeId, price: $price, count: $count) {
+      mutation addIncomingGood(
+        $name: String
+        $storeId: Int!
+        $productId: Int
+        $price: Int
+        $count: Int!
+      ) {
+        addIncomingGood(
+          name: $name
+          storeId: $storeId
+          price: $price
+          count: $count
+          productId: $productId
+        ) {
           id
           name
         }

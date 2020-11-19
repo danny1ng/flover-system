@@ -44,7 +44,7 @@ const columns: Column[] = [
     Header: 'Время',
     accessor: 'createdAt',
     Cell: ({ value }) => {
-      return format(new Date(value), 'MM/dd/yyyy p', { locale: ru });
+      return format(new Date(value), 'p', { locale: ru });
     },
   },
 ];

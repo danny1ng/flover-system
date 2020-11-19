@@ -1,21 +1,20 @@
 import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { redirect } from 'libs';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Button, FormField, InputSelect, TextInput } from 'ui';
 
-import { addProductReq, getProductsQuery } from 'features/products/api';
+import { addIncomingGoodReq } from 'features/incoming-goods/api';
+import { getProductsQuery } from 'features/products/api';
 import { useStore } from 'features/store';
 
-import { schema } from './schema';
-
 export const AddIncomingGoodsForm = () => {
+  const methods = useForm();
   const { storeId } = useStore();
-  const [addProduct] = useMutation(addProductReq, {
+  const [addProduct] = useMutation(addIncomingGoodReq, {
     onSuccess: () => {
-      redirect(null, '/products');
+      redirect(null, '/incoming-goods');
     },
   });
   const { data } = useQuery<{ products: NexusGenFieldTypes['Query']['products'] }>([
@@ -23,27 +22,37 @@ export const AddIncomingGoodsForm = () => {
     { storeId },
   ]);
 
-  const selectProductOptions = useMemo(
-    () =>
-      data?.products.map(item => ({
-        label: `${item.name} | ${item.count} шт.`,
-        value: item.id.toString(),
-      })),
-    [data?.products],
-  );
+  const selectProductOptions = useMemo(() => data?.products.map(item => item.name), [
+    data?.products,
+  ]);
 
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const isNotExist = useMemo(() => {
+    return !selectProductOptions?.find(
+      item => item.toLowerCase() === methods.watch('name')?.toLowerCase(),
+    );
+  }, [methods, selectProductOptions]);
 
   const onSubmit = useCallback(
     async (val: NexusGenFieldTypes['Product']) => {
-      await addProduct({
-        storeId,
-        name: val.name,
-        count: Number(val.count),
-        price: Number(val.price),
-      });
+      const product = data?.products.find(
+        item => item.name.toLowerCase() === val.name.toLowerCase(),
+      );
+      if (product) {
+        await addProduct({
+          storeId,
+          productId: product.id,
+          count: Number(val.count),
+        });
+      } else {
+        await addProduct({
+          storeId,
+          name: val.name.toLowerCase(),
+          count: Number(val.count),
+          price: Number(val.price),
+        });
+      }
     },
-    [addProduct, storeId],
+    [addProduct, storeId, data],
   );
 
   return (
@@ -60,15 +69,35 @@ export const AddIncomingGoodsForm = () => {
             name="name"
             label="Название"
             items={selectProductOptions}
+            controlled
+            rules={{ required: { message: 'поле обязательно', value: true } }}
           />
-          <FormField component={TextInput} className="mb-2" name="name" label="Название" />
-          <FormField component={TextInput} className="mb-2" name="price" label="Цена" />
+          {isNotExist && (
+            <FormField
+              component={TextInput}
+              className="mb-2"
+              name="price"
+              label="Цена"
+              rules={{
+                required: { message: 'поле обязательно', value: true },
+                validate: {
+                  positive: value => parseInt(value, 10) > 0 || 'минимум 1',
+                },
+              }}
+            />
+          )}
           <FormField
             component={TextInput}
             className="mb-2"
             name="count"
             label="Количество"
             defaultValue={1}
+            rules={{
+              required: { message: 'поле обязательно', value: true },
+              validate: {
+                positive: value => parseInt(value, 10) > 0 || 'минимум 1',
+              },
+            }}
           />
           <Button className="mt-4" disabled={methods.formState.isSubmitting}>
             {methods.formState.isSubmitting ? 'Подождите...' : 'Добавить'}

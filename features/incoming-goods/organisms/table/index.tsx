@@ -1,12 +1,14 @@
 import { Column, useTable } from 'react-table';
 import Link from 'next/link';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 import { Icon } from 'ui';
 
 const columns: Column[] = [
   {
     Header: 'Товар',
-    accessor: 'name', // accessor is the "key" in the data
+    accessor: 'name',
   },
   {
     Header: 'Цена',
@@ -22,9 +24,16 @@ const columns: Column[] = [
       return value + ' шт.';
     },
   },
+  {
+    Header: 'Время',
+    accessor: 'createdAt',
+    Cell: ({ value }) => {
+      return format(new Date(value), 'p', { locale: ru });
+    },
+  },
 ];
 
-export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['products'] }) => {
+export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['incomingGoods'] }) => {
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 

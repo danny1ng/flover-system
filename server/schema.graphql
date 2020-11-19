@@ -16,7 +16,17 @@ type Deduction {
   summary: Int!
 }
 
+type IncomingGood {
+  count: Float!
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  price: Int!
+  store: Store
+}
+
 type Mutation {
+  addIncomingGood(count: Int!, name: String, price: Int, productId: Int, storeId: Int!): IncomingGood
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
   addSale(count: Int!, discount: Int, note: String, payType: payType, productId: Int!, storeId: Int!): Sale
   editProduct(count: Int, name: String, price: Int, productId: Int!): Product
@@ -43,6 +53,7 @@ type Product {
 
 type Query {
   deductions(storeId: Int!): [Deduction]
+  incomingGoods(storeId: Int!): [IncomingGood]
   me: User
   product(productId: Int!): Product
   products(storeId: Int!): [Product]

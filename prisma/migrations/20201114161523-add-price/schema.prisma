@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 model Store {
@@ -42,7 +42,7 @@ model IncomingGood {
   count     Float    @default(1)
   store     Store    @relation(fields: [storeId], references: [id])
   storeId   Int
-  createdAt DateTime @default(now())
+  createdAt DateTime
   price     Int
 }
 

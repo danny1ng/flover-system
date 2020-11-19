@@ -39,7 +39,12 @@ export function FormField<T = React.FunctionComponent>(props: FieldsetProps<T>) 
               render={renderProps => <Component {...defaultProps} {...renderProps} />}
             />
           ) : (
-            <Component className="w-full" name={name} ref={register} {...defaultProps} />
+            <Component
+              className="w-full"
+              name={name}
+              ref={register(rules || {})}
+              {...defaultProps}
+            />
           )}
         </div>
       </label>

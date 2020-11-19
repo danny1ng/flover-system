@@ -25,7 +25,7 @@ export const AddProductForm = () => {
     async (val: NexusGenFieldTypes['Product']) => {
       await addProduct({
         storeId,
-        name: val.name,
+        name: val.name.toLowerCase(),
         count: Number(val.count),
         price: Number(val.price),
       });
