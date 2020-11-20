@@ -3,7 +3,11 @@ import { PrismaClient } from '@prisma/client';
 
 import { rules } from './permissions';
 
-const prisma = new PrismaClient();
+if (process.env.NODE_ENV === 'development' && !(global as any).__prisma__) {
+  (global as any).__prisma__ = new PrismaClient();
+}
+
+const prisma = (global as any).__prisma__ || new PrismaClient();
 
 export interface Context {
   prisma: PrismaClient;
