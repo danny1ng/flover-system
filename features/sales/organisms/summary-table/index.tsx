@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
+import { useQuery } from 'react-query';
 import { Column, useTable } from 'react-table';
 import { NexusGenFieldTypes } from 'nexus-typegen';
+
+import { getDeductionsQuery } from 'features/deductions/api';
+import { useStore } from 'features/store';
 
 const columns: Column[] = [
   {
@@ -37,9 +41,17 @@ export const SummaryTable = ({
   salesData: NexusGenFieldTypes['Query']['sales'];
   storeData: NexusGenFieldTypes['Query']['store'];
 }) => {
+  const { storeId } = useStore();
+  const { data: deductionsData } = useQuery<{
+    deductions: NexusGenFieldTypes['Query']['deductions'];
+  }>([getDeductionsQuery, { storeId }]);
   const summarySales = useMemo(() => salesData.reduce((acc, item) => item.summary + acc, 0), [
     salesData,
   ]);
+  const summaryDeductions = useMemo(
+    () => deductionsData?.deductions.reduce((acc, item) => item.summary + acc, 0),
+    [deductionsData?.deductions],
+  );
   const summaryCashSales = useMemo(
     () => salesData.reduce((acc, item) => (item.payType === 'CASH' ? item.summary + acc : acc), 0),
     [salesData],
@@ -58,8 +70,9 @@ export const SummaryTable = ({
         cash: summaryCashSales,
         wire: summaryWireSales,
       },
+      { name: 'Вычеты', summary: -summaryDeductions },
       { name: 'Касса', summary: storeData.balance },
-      { name: 'Всего', summary: summarySales + storeData.balance },
+      { name: 'Всего', summary: summarySales + storeData.balance - summaryDeductions },
     ],
   });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
