@@ -27,7 +27,7 @@ export const AddSaleForm = () => {
   const selectProductOptions = useMemo(
     () =>
       data?.products.map(item => ({
-        label: `${item.name} | ${item.count} шт.`,
+        label: `${item.name} | ${item.count} шт. | ${item.price} р.`,
         value: item.id.toString(),
       })),
     [data?.products],

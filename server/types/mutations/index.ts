@@ -124,6 +124,8 @@ export const Mutation = mutationType({
       },
       resolve: async (_parent, { storeId, productId, discount, count, ...sale }, ctx) => {
         const product = await ctx.prisma.product.findOne({ where: { id: productId } });
+        const store = await ctx.prisma.store.findOne({ where: { id: storeId } });
+        const summarySale = product.price * count - (discount || 0);
 
         const createdSale = ctx.prisma.sale.create({
           data: {
@@ -144,7 +146,12 @@ export const Mutation = mutationType({
           data: { count: product.count - count },
         });
 
-        await ctx.prisma.$transaction([createdSale, updatedProduct]);
+        const updateStoreBalance = ctx.prisma.store.update({
+          where: { id: storeId },
+          data: { balance: store.balance + summarySale },
+        });
+
+        await ctx.prisma.$transaction([createdSale, updatedProduct, updateStoreBalance]);
 
         return createdSale;
       },
