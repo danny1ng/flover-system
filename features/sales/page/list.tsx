@@ -8,13 +8,16 @@ import { Head, Layout } from 'features/layout';
 import { useStore } from 'features/store';
 
 import { getSalesQuery } from '../api';
-import { Table } from '../organisms/table';
+import { SalesTable } from '../organisms/sales-table';
 
 const SaleList = () => {
   const { storeId } = useStore();
   const { data } = useQuery<{
     sales: NexusGenFieldTypes['Query']['sales'];
   }>([getSalesQuery, { storeId }]);
+
+  // const summarySales
+
   return (
     <>
       <Head title="Продажи за день" />
@@ -31,7 +34,7 @@ const SaleList = () => {
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                  {data?.sales && <Table data={data.sales} />}
+                  {data?.sales && <SalesTable data={data.sales} />}
                 </div>
               </div>
             </div>

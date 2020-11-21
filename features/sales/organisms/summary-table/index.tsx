@@ -56,7 +56,7 @@ const columns: Column[] = [
   },
 ];
 
-export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) => {
+export const SummaryTable = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) => {
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
