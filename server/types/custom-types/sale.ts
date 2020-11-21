@@ -6,6 +6,7 @@ export const Sale = objectType({
     t.model.id();
     t.model.count();
     t.model.discount();
+    t.model.price();
     t.model.name();
     t.model.summary();
     t.model.payType();

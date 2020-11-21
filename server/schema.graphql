@@ -76,6 +76,7 @@ type Sale {
   name: String!
   note: String
   payType: PayType!
+  price: Int!
   store: Store
   summary: Int!
 }

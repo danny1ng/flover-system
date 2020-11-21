@@ -129,6 +129,7 @@ export const Mutation = mutationType({
           data: {
             ...sale,
             name: product.name,
+            price: product.price,
             count,
             discount,
             summary: product.price * count - (discount || 0),

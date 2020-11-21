@@ -16,6 +16,13 @@ const columns: Column[] = [
     },
   },
   {
+    Header: 'Цена',
+    accessor: 'price',
+    Cell: ({ value }) => {
+      return value + ' р.';
+    },
+  },
+  {
     Header: 'Сумма',
     accessor: 'summary',
     Cell: ({ value }) => {
@@ -74,7 +81,8 @@ export const Table = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) 
         <tr>
           <td className="px-6 py-4 whitespace-no-wrap font-bold">Касса</td>
           <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap">2340</td>
+          <td className="px-6 py-4 whitespace-no-wrap" />
+          <td className="px-6 py-4 whitespace-no-wrap">2340 р.</td>
           <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />
           <td className="px-6 py-4 whitespace-no-wrap" />

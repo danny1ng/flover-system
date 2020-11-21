@@ -10,6 +10,7 @@ export const getSalesQuery = gql`
       note
       summary
       payType
+      price
       createdAt
       name
       store {

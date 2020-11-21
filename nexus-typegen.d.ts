@@ -69,6 +69,7 @@ export interface NexusGenRootTypes {
     name: string; // String!
     note?: string | null; // String
     payType: NexusGenEnums['PayType']; // PayType!
+    price: number; // Int!
     summary: number; // Int!
   }
   Store: { // root type
@@ -146,6 +147,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     note: string | null; // String
     payType: NexusGenEnums['PayType']; // PayType!
+    price: number; // Int!
     store: NexusGenRootTypes['Store'] | null; // Store
     summary: number; // Int!
   }
@@ -215,6 +217,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     note: 'String'
     payType: 'PayType'
+    price: 'Int'
     store: 'Store'
     summary: 'Int'
   }
