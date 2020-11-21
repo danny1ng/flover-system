@@ -1,25 +1,24 @@
+import { useMemo } from 'react';
 import { Column, useTable } from 'react-table';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 
 const columns: Column[] = [
   {
-    Header: 'Товар',
+    Header: 'Итого',
     accessor: 'name',
   },
   {
-    Header: 'Кол-во',
-    accessor: 'count',
+    Header: 'Безнал.',
+    accessor: 'wire',
     Cell: ({ value }) => {
-      return value + ' шт.';
+      return value ? value + ' р.' : '-';
     },
   },
   {
-    Header: 'Цена',
-    accessor: 'price',
+    Header: 'Нал.',
+    accessor: 'cash',
     Cell: ({ value }) => {
-      return value + ' р.';
+      return value ? value + ' р.' : '-';
     },
   },
   {
@@ -29,85 +28,83 @@ const columns: Column[] = [
       return value + ' р.';
     },
   },
-  {
-    Header: 'Скидка',
-    accessor: 'discount',
-    Cell: ({ value }) => {
-      return value + ' р.';
-    },
-  },
-  {
-    Header: 'Вид оплаты',
-    accessor: 'payType',
-    Cell: ({ value }) => {
-      return value === 'CASH' ? 'Нал.' : 'Безнал.';
-    },
-  },
-  {
-    Header: 'Примечание',
-    accessor: 'note',
-  },
-  {
-    Header: 'Время',
-    accessor: 'createdAt',
-    Cell: ({ value }) => {
-      return format(new Date(value), 'p', { locale: ru });
-    },
-  },
 ];
 
-export const SummaryTable = ({ data }: { data: NexusGenFieldTypes['Query']['sales'] }) => {
-  const tableInstance = useTable({ columns, data });
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+export const SummaryTable = ({
+  salesData,
+  storeData,
+}: {
+  salesData: NexusGenFieldTypes['Query']['sales'];
+  storeData: NexusGenFieldTypes['Query']['store'];
+}) => {
+  const summarySales = useMemo(() => salesData.reduce((acc, item) => item.summary + acc, 0), [
+    salesData,
+  ]);
+  const summaryCashSales = useMemo(
+    () => salesData.reduce((acc, item) => (item.payType === 'CASH' ? item.summary + acc : acc), 0),
+    [salesData],
+  );
+  const summaryWireSales = useMemo(
+    () => salesData.reduce((acc, item) => (item.payType === 'WIRE' ? item.summary + acc : acc), 0),
+    [salesData],
+  );
 
+  const tableInstance = useTable({
+    columns,
+    data: [
+      {
+        name: 'Продажи',
+        summary: summarySales,
+        cash: summaryCashSales,
+        wire: summaryWireSales,
+      },
+      { name: 'Касса', summary: storeData.balance },
+      { name: 'Всего', summary: summarySales + storeData.balance },
+    ],
+  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
   return (
-    <table className="min-w-full divide-y divide-gray-200" {...getTableProps()}>
-      <thead className="bg-gray-100">
-        {headerGroups.map((headerGroup, i) => (
-          <tr key={i} {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column, i) => (
-              <th
-                key={i}
-                {...column.getHeaderProps()}
-                className="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-              >
-                {column.render('Header')}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody className="bg-white divide-y divide-gray-200" {...getTableBodyProps()}>
-        <tr>
-          <td className="px-6 py-4 whitespace-no-wrap font-bold">Касса</td>
-          <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap">2340 р.</td>
-          <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap" />
-          <td className="px-6 py-4 whitespace-no-wrap" />
-        </tr>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr key={i} {...row.getRowProps()}>
-              {row.cells.map((cell, index) => {
-                return (
-                  <td
-                    key={index}
-                    {...cell.getCellProps()}
-                    className="px-6 py-4 whitespace-no-wrap"
-                    style={{ width: row.cells.length === index + 1 ? 120 : 'auto' }}
+    <div className="mt-8">
+      <div className="max-w-lg shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table className="w-full divide-y divide-gray-200" {...getTableProps()}>
+          <thead className="bg-gray-100">
+            {headerGroups.map((headerGroup, i) => (
+              <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column, i) => (
+                  <th
+                    key={i}
+                    {...column.getHeaderProps()}
+                    className="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    {cell.render('Cell')}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+                    {column.render('Header')}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200" {...getTableBodyProps()}>
+            {rows.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr key={i} {...row.getRowProps()}>
+                  {row.cells.map((cell, index) => {
+                    return (
+                      <td
+                        key={index}
+                        {...cell.getCellProps()}
+                        className="px-6 py-4 whitespace-no-wrap"
+                        style={{ width: 'auto' }}
+                      >
+                        {cell.render('Cell')}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };

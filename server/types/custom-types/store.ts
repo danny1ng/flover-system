@@ -5,6 +5,7 @@ export const Store = objectType({
   definition(t) {
     t.model.id();
     t.model.name();
+    t.model.balance();
     t.list.field('users', {
       type: 'User',
       resolve: (parent, arg, ctx) =>

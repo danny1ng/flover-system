@@ -5,16 +5,21 @@ import { Button } from 'ui';
 
 import { withPageAuth } from 'features/auth';
 import { Head, Layout } from 'features/layout';
-import { useStore } from 'features/store';
+import { getStoreQuery, useStore } from 'features/store';
 
 import { getSalesQuery } from '../api';
 import { SalesTable } from '../organisms/sales-table';
+import { SummaryTable } from '../organisms/summary-table';
 
 const SaleList = () => {
   const { storeId } = useStore();
   const { data } = useQuery<{
     sales: NexusGenFieldTypes['Query']['sales'];
   }>([getSalesQuery, { storeId }]);
+  const { data: storeData } = useQuery<{ store: NexusGenFieldTypes['Query']['store'] }>([
+    getStoreQuery,
+    { storeId },
+  ]);
   return (
     <>
       <Head title="Продажи за день" />
@@ -30,11 +35,14 @@ const SaleList = () => {
           <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                  {data?.sales && <SalesTable data={data.sales} />}
-                </div>
+                {data?.sales && storeData?.store && (
+                  <SalesTable data={data.sales} storeData={storeData.store} />
+                )}
               </div>
             </div>
+            {data?.sales && storeData?.store && (
+              <SummaryTable salesData={data.sales} storeData={storeData.store} />
+            )}
           </div>
         </div>
       </Layout>

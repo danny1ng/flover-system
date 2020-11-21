@@ -27,6 +27,17 @@ export const Query = queryType({
       },
     });
 
+    t.field('store', {
+      type: 'Store',
+      args: {
+        storeId: intArg({ nullable: false }),
+      },
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
+      resolve: (parent, { storeId }, ctx) => {
+        return ctx.prisma.store.findOne({ where: { id: storeId } });
+      },
+    });
+
     t.list.field('deductions', {
       type: 'Deduction',
       args: {

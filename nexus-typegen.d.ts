@@ -73,6 +73,7 @@ export interface NexusGenRootTypes {
     summary: number; // Int!
   }
   Store: { // root type
+    balance: number; // Int!
     id: number; // Int!
     name: string; // String!
   }
@@ -137,6 +138,7 @@ export interface NexusGenFieldTypes {
     product: NexusGenRootTypes['Product'] | null; // Product
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     sales: Array<NexusGenRootTypes['Sale'] | null> | null; // [Sale]
+    store: NexusGenRootTypes['Store'] | null; // Store
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
   }
   Sale: { // field return type
@@ -152,6 +154,7 @@ export interface NexusGenFieldTypes {
     summary: number; // Int!
   }
   Store: { // field return type
+    balance: number; // Int!
     id: number; // Int!
     name: string; // String!
     products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
@@ -207,6 +210,7 @@ export interface NexusGenFieldTypeNames {
     product: 'Product'
     products: 'Product'
     sales: 'Sale'
+    store: 'Store'
     stores: 'Store'
   }
   Sale: { // field return type name
@@ -222,6 +226,7 @@ export interface NexusGenFieldTypeNames {
     summary: 'Int'
   }
   Store: { // field return type name
+    balance: 'Int'
     id: 'Int'
     name: 'String'
     products: 'Product'
@@ -291,6 +296,9 @@ export interface NexusGenArgTypes {
       storeId: number; // Int!
     }
     sales: { // args
+      storeId: number; // Int!
+    }
+    store: { // args
       storeId: number; // Int!
     }
   }

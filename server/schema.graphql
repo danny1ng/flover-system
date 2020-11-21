@@ -60,6 +60,7 @@ type Query {
   product(productId: Int!): Product
   products(storeId: Int!): [Product]
   sales(storeId: Int!): [Sale]
+  store(storeId: Int!): Store
   stores: [Store]
 }
 
@@ -82,6 +83,7 @@ type Sale {
 }
 
 type Store {
+  balance: Int!
   id: Int!
   name: String!
   products: [Product]
