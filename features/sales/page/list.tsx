@@ -16,8 +16,6 @@ const SaleList = () => {
     sales: NexusGenFieldTypes['Query']['sales'];
   }>([getSalesQuery, { storeId }]);
 
-  // const summarySales
-
   return (
     <>
       <Head title="Продажи за день" />
