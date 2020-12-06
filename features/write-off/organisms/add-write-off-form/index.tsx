@@ -38,6 +38,7 @@ export const AddWriteOffForm = () => {
         storeId,
         productId: Number(val.productId),
         count: Number(val.count),
+        note: val.note,
       });
     },
     [addWriteOff, storeId],
@@ -55,7 +56,7 @@ export const AddWriteOffForm = () => {
             component={Select}
             className="mb-2"
             name="productId"
-            label="Название"
+            label="Продукт"
             items={selectProductOptions}
             controlled
             rules={{ required: { message: 'поле обязательно', value: true } }}
@@ -72,6 +73,15 @@ export const AddWriteOffForm = () => {
               validate: {
                 positive: value => parseInt(value, 10) > 0 || 'минимум 1',
               },
+            }}
+          />
+          <FormField
+            component={TextInput}
+            className="mb-2"
+            name="note"
+            label="Примечание"
+            rules={{
+              required: { message: 'поле обязательно', value: true },
             }}
           />
           <Button className="mt-4" disabled={methods.formState.isSubmitting}>

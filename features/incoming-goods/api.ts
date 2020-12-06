@@ -9,17 +9,7 @@ export const getIncomingGoodsQuery = gql`
       price
       count
       createdAt
-    }
-  }
-`;
-
-export const getIncomingGoodQuery = gql`
-  query Products($productId: Int!) {
-    product(productId: $productId) {
-      id
-      name
-      price
-      count
+      note
     }
   }
 `;

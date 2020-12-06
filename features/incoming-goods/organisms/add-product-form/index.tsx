@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { redirect } from 'libs';
-import { NexusGenFieldTypes } from 'nexus-typegen';
+import { NexusGenArgTypes, NexusGenFieldTypes } from 'nexus-typegen';
 import { Button, FormField, InputSelect, TextInput } from 'ui';
 
 import { addIncomingGoodReq } from 'features/incoming-goods/api';
@@ -12,7 +12,7 @@ import { useStore } from 'features/store';
 export const AddIncomingGoodsForm = () => {
   const methods = useForm();
   const { storeId } = useStore();
-  const [addProduct] = useMutation(addIncomingGoodReq, {
+  const [addIncomingGood] = useMutation(addIncomingGoodReq, {
     onSuccess: () => {
       redirect(null, '/incoming-goods');
     },
@@ -33,26 +33,28 @@ export const AddIncomingGoodsForm = () => {
   }, [methods, selectProductOptions]);
 
   const onSubmit = useCallback(
-    async (val: NexusGenFieldTypes['Product']) => {
+    async (val: NexusGenArgTypes['Mutation']['addIncomingGood']) => {
       const product = data?.products.find(
         item => item.name.toLowerCase() === val.name.toLowerCase(),
       );
       if (product) {
-        await addProduct({
+        await addIncomingGood({
           storeId,
           productId: product.id,
           count: Number(val.count),
+          note: val.note,
         });
       } else {
-        await addProduct({
+        await addIncomingGood({
           storeId,
           name: val.name.toLowerCase(),
           count: Number(val.count),
           price: Number(val.price),
+          note: val.note,
         });
       }
     },
-    [addProduct, storeId, data],
+    [addIncomingGood, storeId, data],
   );
 
   return (
@@ -97,6 +99,15 @@ export const AddIncomingGoodsForm = () => {
               validate: {
                 positive: value => parseInt(value, 10) > 0 || 'минимум 1',
               },
+            }}
+          />
+          <FormField
+            component={TextInput}
+            className="mb-2"
+            name="note"
+            label="Примечание"
+            rules={{
+              required: { message: 'поле обязательно', value: true },
             }}
           />
           <Button className="mt-4" disabled={methods.formState.isSubmitting}>
