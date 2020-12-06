@@ -1,6 +1,5 @@
 import { Column, useTable } from 'react-table';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import { formatDate } from 'libs';
 import { NexusGenFieldTypes } from 'nexus-typegen';
 
 const columns: Column[] = [
@@ -51,7 +50,7 @@ const columns: Column[] = [
     Header: 'Время',
     accessor: 'createdAt',
     Cell: ({ value }) => {
-      return format(new Date(value), 'p', { locale: ru });
+      return formatDate(value);
     },
   },
 ];
@@ -105,7 +104,7 @@ export const SalesTable = ({
                       key={index}
                       {...cell.getCellProps()}
                       className="px-6 py-4 whitespace-no-wrap"
-                      style={{ width: row.cells.length === index + 1 ? 120 : 'auto' }}
+                      style={{ width: row.cells.length === index + 1 ? 160 : 'auto' }}
                     >
                       {cell.render('Cell')}
                     </td>

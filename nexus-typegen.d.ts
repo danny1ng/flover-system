@@ -36,7 +36,7 @@ export interface NexusGenScalars {
   DateTime: any
 }
 
-export interface NexusGenRootTypes {
+export interface NexusGenObjects {
   AuthPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
@@ -84,17 +84,15 @@ export interface NexusGenRootTypes {
   }
 }
 
-export interface NexusGenAllTypes extends NexusGenRootTypes {
-  PayType: NexusGenEnums['PayType'];
-  Role: NexusGenEnums['Role'];
-  payType: NexusGenEnums['payType'];
-  String: NexusGenScalars['String'];
-  Int: NexusGenScalars['Int'];
-  Float: NexusGenScalars['Float'];
-  Boolean: NexusGenScalars['Boolean'];
-  ID: NexusGenScalars['ID'];
-  DateTime: NexusGenScalars['DateTime'];
+export interface NexusGenInterfaces {
 }
+
+export interface NexusGenUnions {
+}
+
+export type NexusGenRootTypes = NexusGenObjects
+
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   AuthPayload: { // field return type
@@ -304,22 +302,35 @@ export interface NexusGenArgTypes {
   }
 }
 
-export interface NexusGenAbstractResolveReturnTypes {
+export interface NexusGenAbstractTypeMembers {
 }
 
-export interface NexusGenInheritedFields {}
+export interface NexusGenTypeInterfaces {
+}
 
-export type NexusGenObjectNames = "AuthPayload" | "Deduction" | "IncomingGood" | "Mutation" | "Product" | "Query" | "Sale" | "Store" | "User";
+export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = "PayType" | "Role" | "payType";
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = keyof NexusGenScalars;
 
 export type NexusGenUnionNames = never;
+
+export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
+
+export type NexusGenAbstractsUsingStrategyResolveType = never;
+
+export type NexusGenFeaturesConfig = {
+  abstractTypeStrategies: {
+    isTypeOf: false
+    resolveType: true
+    __typename: false
+  }
+}
 
 export interface NexusGenTypes {
   context: Context.Context;
@@ -329,7 +340,7 @@ export interface NexusGenTypes {
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
   allTypes: NexusGenAllTypes;
-  inheritedFields: NexusGenInheritedFields;
+  typeInterfaces: NexusGenTypeInterfaces;
   objectNames: NexusGenObjectNames;
   inputNames: NexusGenInputNames;
   enumNames: NexusGenEnumNames;
@@ -340,7 +351,10 @@ export interface NexusGenTypes {
   allOutputTypes: NexusGenTypes['objectNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['unionNames'] | NexusGenTypes['interfaceNames'] | NexusGenTypes['scalarNames'];
   allNamedTypes: NexusGenTypes['allInputTypes'] | NexusGenTypes['allOutputTypes']
   abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames'];
-  abstractResolveReturn: NexusGenAbstractResolveReturnTypes;
+  abstractTypeMembers: NexusGenAbstractTypeMembers;
+  objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf;
+  abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
+  features: NexusGenFeaturesConfig;
 }
 
 
@@ -357,7 +371,71 @@ declare global {
      * resolver from executing.
      */
     authorize?: FieldAuthorizeResolver<TypeName, FieldName>
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
+  }
+  interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
   }
   interface NexusGenPluginSchemaConfig {
+  }
+  interface NexusGenPluginArgConfig {
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
   }
 }

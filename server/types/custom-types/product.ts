@@ -10,7 +10,7 @@ export const Product = objectType({
     t.field('store', {
       type: 'Store',
       resolve: (parent, arg, ctx) =>
-        ctx.prisma.store.findOne({
+        ctx.prisma.store.findUnique({
           where: { id: Number(parent.id) },
         }),
     });

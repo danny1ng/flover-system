@@ -60,7 +60,7 @@ module.exports = {
         skipComments: true,
       },
     ],
-    'simple-import-sort/sort': [
+    'simple-import-sort/imports': [
       1,
       {
         groups: [

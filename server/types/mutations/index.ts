@@ -37,7 +37,7 @@ export const Mutation = mutationType({
         password: stringArg({ nullable: false }),
       },
       resolve: async (_parent, { name, password }, ctx) => {
-        const user = await ctx.prisma.user.findOne({
+        const user = await ctx.prisma.user.findUnique({
           where: {
             name: name.toLowerCase(),
           },
@@ -120,11 +120,11 @@ export const Mutation = mutationType({
         count: intArg({ nullable: false }),
         discount: intArg(),
         note: stringArg(),
-        payType: enumType({ name: 'payType', members: ['WIRE', 'CASH'] }),
+        payType: enumType({ name: 'PayType', members: ['WIRE', 'CASH'] }),
       },
       resolve: async (_parent, { storeId, productId, discount, count, ...sale }, ctx) => {
-        const product = await ctx.prisma.product.findOne({ where: { id: productId } });
-        const store = await ctx.prisma.store.findOne({ where: { id: storeId } });
+        const product = await ctx.prisma.product.findUnique({ where: { id: productId } });
+        const store = await ctx.prisma.store.findUnique({ where: { id: storeId } });
         const summarySale = product.price * count - (discount || 0);
 
         const createdSale = ctx.prisma.sale.create({
@@ -167,7 +167,7 @@ export const Mutation = mutationType({
       },
       resolve: async (_parent, { storeId, productId, count, price, name }, ctx) => {
         if (productId) {
-          const product = await ctx.prisma.product.findOne({ where: { id: productId } });
+          const product = await ctx.prisma.product.findUnique({ where: { id: productId } });
 
           const updatedProduct = ctx.prisma.product.update({
             where: { id: productId },

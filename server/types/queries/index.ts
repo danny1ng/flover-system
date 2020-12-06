@@ -11,7 +11,7 @@ export const Query = queryType({
       resolve: (parent, args, ctx) => {
         const userId = getUserId(ctx);
 
-        return ctx.prisma.user.findOne({
+        return ctx.prisma.user.findUnique({
           where: {
             id: Number(userId),
           },
@@ -34,7 +34,7 @@ export const Query = queryType({
       },
       authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, { storeId }, ctx) => {
-        return ctx.prisma.store.findOne({ where: { id: storeId } });
+        return ctx.prisma.store.findUnique({ where: { id: storeId } });
       },
     });
 
@@ -71,7 +71,7 @@ export const Query = queryType({
       },
       authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
       resolve: (parent, args, ctx) => {
-        return ctx.prisma.product.findOne({
+        return ctx.prisma.product.findUnique({
           where: { id: args.productId },
         });
       },

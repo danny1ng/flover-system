@@ -10,7 +10,7 @@ export const User = objectType({
       type: 'Store',
       resolve: (parent, arg, ctx) =>
         ctx.prisma.user
-          .findOne({
+          .findUnique({
             where: { id: Number(parent.id) },
           })
           .stores(),
