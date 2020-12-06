@@ -24,7 +24,6 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   PayType: "CASH" | "WIRE"
   Role: "ADMIN" | "SELLER"
-  payType: "CASH" | "WIRE"
 }
 
 export interface NexusGenScalars {
@@ -115,12 +114,12 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addDeduction: NexusGenRootTypes['Deduction'] | null; // Deduction
-    addIncomingGood: NexusGenRootTypes['IncomingGood'] | null; // IncomingGood
     addProduct: NexusGenRootTypes['Product'] | null; // Product
     addSale: NexusGenRootTypes['Sale'] | null; // Sale
     deleteProduct: NexusGenRootTypes['Product'] | null; // Product
     editProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Product: { // field return type
     count: number; // Float!
@@ -187,12 +186,12 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addDeduction: 'Deduction'
-    addIncomingGood: 'IncomingGood'
     addProduct: 'Product'
     addSale: 'Sale'
     deleteProduct: 'Product'
     editProduct: 'Product'
     login: 'AuthPayload'
+    signup: 'AuthPayload'
   }
   Product: { // field return type name
     count: 'Float'
@@ -245,13 +244,6 @@ export interface NexusGenArgTypes {
       storeId: number; // Int!
       summary: number; // Int!
     }
-    addIncomingGood: { // args
-      count: number; // Int!
-      name?: string | null; // String
-      price?: number | null; // Int
-      productId?: number | null; // Int
-      storeId: number; // Int!
-    }
     addProduct: { // args
       count?: number | null; // Int
       name: string; // String!
@@ -262,7 +254,7 @@ export interface NexusGenArgTypes {
       count: number; // Int!
       discount?: number | null; // Int
       note?: string | null; // String
-      payType?: NexusGenEnums['payType'] | null; // payType
+      payType?: NexusGenEnums['PayType'] | null; // PayType
       productId: number; // Int!
       storeId: number; // Int!
     }
@@ -277,6 +269,10 @@ export interface NexusGenArgTypes {
     }
     login: { // args
       name: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      name?: string | null; // String
       password: string; // String!
     }
   }

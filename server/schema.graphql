@@ -27,17 +27,12 @@ type IncomingGood {
 
 type Mutation {
   addDeduction(message: String!, storeId: Int!, summary: Int!): Deduction
-  addIncomingGood(count: Int!, name: String, price: Int, productId: Int, storeId: Int!): IncomingGood
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
-  addSale(count: Int!, discount: Int, note: String, payType: payType, productId: Int!, storeId: Int!): Sale
+  addSale(count: Int!, discount: Int, note: String, payType: PayType, productId: Int!, storeId: Int!): Sale
   deleteProduct(productId: Int!): Product
   editProduct(count: Int, name: String, price: Int, productId: Int!): Product
   login(name: String!, password: String!): AuthPayload
-}
-
-enum payType {
-  CASH
-  WIRE
+  signup(name: String, password: String!): AuthPayload
 }
 
 enum PayType {

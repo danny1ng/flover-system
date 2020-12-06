@@ -1,4 +1,4 @@
-import { intArg, queryType, stringArg } from '@nexus/schema';
+import { intArg, queryType } from '@nexus/schema';
 
 import { getUserId } from '../../utils';
 
