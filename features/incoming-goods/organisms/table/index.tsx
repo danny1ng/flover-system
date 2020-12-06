@@ -22,6 +22,10 @@ const columns: Column[] = [
     },
   },
   {
+    Header: 'Примечание',
+    accessor: 'note',
+  },
+  {
     Header: 'Время',
     accessor: 'createdAt',
     Cell: ({ value }) => {

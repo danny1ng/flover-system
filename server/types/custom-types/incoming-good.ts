@@ -7,6 +7,7 @@ export const IncomingGood = objectType({
     t.model.count();
     t.model.name();
     t.model.price();
+    t.model.note();
     t.model.createdAt();
     t.field('store', {
       type: 'Store',

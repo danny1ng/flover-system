@@ -27,6 +27,7 @@ type IncomingGood {
 
 type Mutation {
   addDeduction(message: String!, storeId: Int!, summary: Int!): Deduction
+  addIncomingGood(count: Int!, name: String, note: String, price: Int, productId: Int, storeId: Int!): IncomingGood
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
   addSale(count: Int!, discount: Int, note: String, payType: PayType, productId: Int!, storeId: Int!): Sale
   deleteProduct(productId: Int!): Product

@@ -114,6 +114,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addDeduction: NexusGenRootTypes['Deduction'] | null; // Deduction
+    addIncomingGood: NexusGenRootTypes['IncomingGood'] | null; // IncomingGood
     addProduct: NexusGenRootTypes['Product'] | null; // Product
     addSale: NexusGenRootTypes['Sale'] | null; // Sale
     deleteProduct: NexusGenRootTypes['Product'] | null; // Product
@@ -186,6 +187,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addDeduction: 'Deduction'
+    addIncomingGood: 'IncomingGood'
     addProduct: 'Product'
     addSale: 'Sale'
     deleteProduct: 'Product'
@@ -243,6 +245,14 @@ export interface NexusGenArgTypes {
       message: string; // String!
       storeId: number; // Int!
       summary: number; // Int!
+    }
+    addIncomingGood: { // args
+      count: number; // Int!
+      name?: string | null; // String
+      note?: string | null; // String
+      price?: number | null; // Int
+      productId?: number | null; // Int
+      storeId: number; // Int!
     }
     addProduct: { // args
       count?: number | null; // Int

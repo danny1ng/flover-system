@@ -8,8 +8,9 @@ export const Mutation = mutationField('addIncomingGood', {
     count: intArg({ nullable: false }),
     name: stringArg({ required: false }),
     price: intArg({ required: false }),
+    note: stringArg({ required: false }),
   },
-  resolve: async (_parent, { storeId, productId, count, price, name }, ctx) => {
+  resolve: async (_parent, { storeId, productId, count, price, name, note }, ctx) => {
     if (productId) {
       const product = await ctx.prisma.product.findUnique({ where: { id: productId } });
 
@@ -23,6 +24,7 @@ export const Mutation = mutationField('addIncomingGood', {
           count,
           name: product.name,
           price: product.price,
+          note,
         },
       });
       await ctx.prisma.$transaction([addIncomingGood, updatedProduct]);

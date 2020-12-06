@@ -33,6 +33,7 @@ export const addIncomingGoodReq = values =>
         $productId: Int
         $price: Int
         $count: Int!
+        $note: String
       ) {
         addIncomingGood(
           name: $name
@@ -40,6 +41,7 @@ export const addIncomingGoodReq = values =>
           price: $price
           count: $count
           productId: $productId
+          note: $note
         ) {
           id
           name
