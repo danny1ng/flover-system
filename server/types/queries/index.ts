@@ -98,5 +98,16 @@ export const Query = queryType({
         return ctx.prisma.incomingGood.findMany({ where: { storeId } });
       },
     });
+
+    t.list.field('writeOffs', {
+      type: 'WriteOff',
+      args: {
+        storeId: intArg({ nullable: false }),
+      },
+      authorize: (parent, args, ctx) => ctx.auth.isAuthenticatedUser(ctx),
+      resolve: (parent, { storeId }, ctx) => {
+        return ctx.prisma.writeOff.findMany({ where: { storeId } });
+      },
+    });
   },
 });

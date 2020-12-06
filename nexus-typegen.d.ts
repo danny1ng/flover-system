@@ -50,6 +50,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     name: string; // String!
+    note?: string | null; // String
     price: number; // Int!
   }
   Mutation: {};
@@ -81,6 +82,13 @@ export interface NexusGenObjects {
     name: string; // String!
     role: NexusGenEnums['Role']; // Role!
   }
+  WriteOff: { // root type
+    count: number; // Float!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    name: string; // String!
+    note?: string | null; // String
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -109,6 +117,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     name: string; // String!
+    note: string | null; // String
     price: number; // Int!
     store: NexusGenRootTypes['Store'] | null; // Store
   }
@@ -117,6 +126,7 @@ export interface NexusGenFieldTypes {
     addIncomingGood: NexusGenRootTypes['IncomingGood'] | null; // IncomingGood
     addProduct: NexusGenRootTypes['Product'] | null; // Product
     addSale: NexusGenRootTypes['Sale'] | null; // Sale
+    addWriteOff: NexusGenRootTypes['WriteOff'] | null; // WriteOff
     deleteProduct: NexusGenRootTypes['Product'] | null; // Product
     editProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
@@ -138,6 +148,7 @@ export interface NexusGenFieldTypes {
     sales: Array<NexusGenRootTypes['Sale'] | null> | null; // [Sale]
     store: NexusGenRootTypes['Store'] | null; // Store
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
+    writeOffs: Array<NexusGenRootTypes['WriteOff'] | null> | null; // [WriteOff]
   }
   Sale: { // field return type
     count: number; // Int!
@@ -164,6 +175,14 @@ export interface NexusGenFieldTypes {
     role: NexusGenEnums['Role']; // Role!
     stores: Array<NexusGenRootTypes['Store'] | null> | null; // [Store]
   }
+  WriteOff: { // field return type
+    count: number; // Float!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    name: string; // String!
+    note: string | null; // String
+    store: NexusGenRootTypes['Store'] | null; // Store
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -182,6 +201,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     id: 'Int'
     name: 'String'
+    note: 'String'
     price: 'Int'
     store: 'Store'
   }
@@ -190,6 +210,7 @@ export interface NexusGenFieldTypeNames {
     addIncomingGood: 'IncomingGood'
     addProduct: 'Product'
     addSale: 'Sale'
+    addWriteOff: 'WriteOff'
     deleteProduct: 'Product'
     editProduct: 'Product'
     login: 'AuthPayload'
@@ -211,6 +232,7 @@ export interface NexusGenFieldTypeNames {
     sales: 'Sale'
     store: 'Store'
     stores: 'Store'
+    writeOffs: 'WriteOff'
   }
   Sale: { // field return type name
     count: 'Int'
@@ -236,6 +258,14 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     role: 'Role'
     stores: 'Store'
+  }
+  WriteOff: { // field return type name
+    count: 'Float'
+    createdAt: 'DateTime'
+    id: 'Int'
+    name: 'String'
+    note: 'String'
+    store: 'Store'
   }
 }
 
@@ -265,6 +295,12 @@ export interface NexusGenArgTypes {
       discount?: number | null; // Int
       note?: string | null; // String
       payType?: NexusGenEnums['PayType'] | null; // PayType
+      productId: number; // Int!
+      storeId: number; // Int!
+    }
+    addWriteOff: { // args
+      count: number; // Int!
+      note?: string | null; // String
       productId: number; // Int!
       storeId: number; // Int!
     }
@@ -303,6 +339,9 @@ export interface NexusGenArgTypes {
       storeId: number; // Int!
     }
     store: { // args
+      storeId: number; // Int!
+    }
+    writeOffs: { // args
       storeId: number; // Int!
     }
   }

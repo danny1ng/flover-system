@@ -1,6 +1,6 @@
 import { intArg, mutationField, stringArg } from '@nexus/schema';
 
-export const Mutation = mutationField('addIncomingGood', {
+export const addIncomingGood = mutationField('addIncomingGood', {
   type: 'IncomingGood',
   args: {
     storeId: intArg({ nullable: false }),

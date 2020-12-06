@@ -15,6 +15,11 @@ export const links = [
     role: ['ADMIN', 'SELLER'] as UserRole[],
   },
   {
+    label: 'Списания',
+    href: '/write-offs',
+    role: ['ADMIN', 'SELLER'] as UserRole[],
+  },
+  {
     label: 'Товары',
     href: '/products',
     role: ['ADMIN'] as UserRole[],

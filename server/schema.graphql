@@ -21,6 +21,7 @@ type IncomingGood {
   createdAt: DateTime!
   id: Int!
   name: String!
+  note: String
   price: Int!
   store: Store
 }
@@ -30,6 +31,7 @@ type Mutation {
   addIncomingGood(count: Int!, name: String, note: String, price: Int, productId: Int, storeId: Int!): IncomingGood
   addProduct(count: Int, name: String!, price: Int!, storeId: Int!): Product
   addSale(count: Int!, discount: Int, note: String, payType: PayType, productId: Int!, storeId: Int!): Sale
+  addWriteOff(count: Int!, note: String, productId: Int!, storeId: Int!): WriteOff
   deleteProduct(productId: Int!): Product
   editProduct(count: Int, name: String, price: Int, productId: Int!): Product
   login(name: String!, password: String!): AuthPayload
@@ -58,6 +60,7 @@ type Query {
   sales(storeId: Int!): [Sale]
   store(storeId: Int!): Store
   stores: [Store]
+  writeOffs(storeId: Int!): [WriteOff]
 }
 
 enum Role {
@@ -91,4 +94,13 @@ type User {
   name: String!
   role: Role!
   stores: [Store]
+}
+
+type WriteOff {
+  count: Float!
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  note: String
+  store: Store
 }

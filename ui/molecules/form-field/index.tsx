@@ -1,4 +1,4 @@
-import { Controller, get, useFormContext, ValidationRules } from 'react-hook-form';
+import { Controller, get, RegisterOptions, useFormContext } from 'react-hook-form';
 import cl from 'clsx';
 
 type GetComponentProps<T> = T extends React.ComponentType<infer P> | React.Component<infer P>
@@ -10,7 +10,7 @@ export type FieldsetProps<T = React.FunctionComponent> = {
   label: string;
   className?: string;
   component: T;
-  rules?: ValidationRules;
+  rules?: RegisterOptions;
   controlled?: boolean;
 } & GetComponentProps<T>;
 

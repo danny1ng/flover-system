@@ -2,7 +2,7 @@ import { yup } from 'libs';
 
 export const schema = yup
   .object()
-  .shape({
+  .shape<any>({
     productId: yup.number().required(),
     count: yup.number().required().positive(),
     payType: yup.string().required(),

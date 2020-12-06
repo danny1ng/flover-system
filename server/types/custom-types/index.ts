@@ -5,3 +5,4 @@ export * from './product';
 export * from './sale';
 export * from './deduction';
 export * from './incoming-good';
+export * from './write-off';

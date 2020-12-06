@@ -50,16 +50,3 @@ export const addIncomingGoodReq = values =>
     `,
     values,
   );
-
-export const editIncomingGoodReq = values =>
-  graphQLClientClient.request(
-    gql`
-      mutation addProduct($name: String!, $productId: Int!, $price: Int!, $count: Int) {
-        editProduct(name: $name, productId: $productId, price: $price, count: $count) {
-          id
-          name
-        }
-      }
-    `,
-    values,
-  );
